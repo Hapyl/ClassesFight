@@ -1,0 +1,69 @@
+main: ru.hapyl.classesfight.ClassesFightPlugin
+name: ClassesFight
+version: 0.2.6
+author: hapyl
+softdepend: [EternaAPI]
+api-version: 1.16
+commands:
+  class:
+    description: Manual command for choosing a class.
+    usage: /class (ClassName)
+  coins:
+    description: Manage players coins.
+    usage: /coins (add,get,set) (OnlinePlayer) (Integer)
+  rubies:
+    description: Manage players rubies.
+    usage: /coins (add,get,set) (OnlinePlayer) (Integer)
+  build:
+    description: Switch build mode.
+    usage: /build
+  start:
+    description: Start the game.
+    usage: /start
+  stop:
+    description: Stop the game.
+    usage: /stop
+  exp:
+    description: "Manage players experience"
+    usage: /exp (set/add/levelup) (Player) (Exp/Lvl) (Amount)
+  console:
+    description: Allows execute commands from the console.
+    usage: /console (String)
+  defaultmap:
+    description: "Sets a default map for the server."
+  play:
+    description: "Plays a sound"
+  sound:
+    description: ""
+  vector:
+    description: "@Experimental"
+  ultimate:
+    description: "@Experimental"
+  stat:
+    description: "@Experimental"
+  team:
+    description: "Allows to join and play as a team."
+    usage: "/team (Leave/Team)"
+  gameeffect:
+    description: ""
+  gm:
+    description: ""
+  damage:
+    description: ""
+  force:
+    description: "Forces god blessings for testing."
+  database:
+    usage: /<database>
+  testwinfx:
+    usage: /<command>
+    description: "Launches win fx."
+  testtakedamage:
+    usage: /<command>
+    description: "Shows visual damage."
+  feedback:
+    usage: /<feedback> (Message...)
+    description: "Sends a feedback report to all admins about the bug."
+  launch:
+    description: "Another admin command..."
+  nextcb:
+    description: "Teleports to next found command block."

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ClassesFight:jar">
+    <output-path>C:/Server/plugins</output-path>
+    <root id="archive" name="ClassesFight.jar">
+      <element id="module-output" name="ClassesFight" />
+    </root>
+  </artifact>
+</component>

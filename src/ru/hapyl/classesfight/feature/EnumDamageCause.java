@@ -66,6 +66,8 @@ public enum EnumDamageCause {
 	DRAGON_BREATH,
 	CRAMMING,
 
+	//
+
 	NONE, // this used as default return
 	OTHER; // this used if there no other damage
 

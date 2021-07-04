@@ -10,7 +10,7 @@ public abstract class CFGameMode {
     private final int timeLimit;
     private final WinConditionEnum winCondition;
 
-    protected CFGameMode(String name, int timeLimit, WinConditionEnum winCondition) {
+    public CFGameMode(String name, int timeLimit, WinConditionEnum winCondition) {
         this.name = name;
         this.timeLimit = timeLimit;
         this.winCondition = winCondition;

@@ -2,6 +2,7 @@ package ru.hapyl.classesfight.classes.iclass;
 
 import com.google.common.collect.Maps;
 import kz.hapyl.spigotutils.module.chat.Chat;
+import kz.hapyl.spigotutils.module.inventory.ItemBuilder;
 import kz.hapyl.spigotutils.module.math.Geometry;
 import kz.hapyl.spigotutils.module.math.gometry.Quality;
 import kz.hapyl.spigotutils.module.math.gometry.WorldParticle;
@@ -14,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
+import org.bukkit.inventory.ItemStack;
 import ru.hapyl.classesfight.GameManager;
 import ru.hapyl.classesfight.ability.Abilities;
 import ru.hapyl.classesfight.classes.ClassEquipment;
@@ -30,6 +32,11 @@ import java.util.Map;
 public class HocusClass extends IClass implements Listener {
 
 	private final Map<Rabbit, Player> loyalRabbit = Maps.newHashMap();
+
+	private final ItemStack helmetDefault = ItemBuilder.playerHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzRkOWI2YmJiNTljOGUzMWJkZTBhZTM2YTYzYTJlZjNjMzg0NzkzNmIzNDJlNDM0ZjI5MjgwZGMyYzI1In19fQ==")
+			.toItemStack();
+	private final ItemStack helmetUltimate = ItemBuilder.playerHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODhhODk5Y2MyMWM3YTc4MzM2NTY1ZWU4ZTc0NjQ2ZGQzZDU2Y2Y0ZTcxZDY4NGJiY2M5NjI5OWE4N2ZiYTcifX19")
+			.toItemStack();
 
 	public HocusClass() {
 		super("Hocus", Material.AMETHYST_SHARD);
@@ -74,6 +81,11 @@ public class HocusClass extends IClass implements Listener {
 		this.setUltimateSound(Sound.ENTITY_RABBIT_DEATH, 0.0f);
 		this.setRole(ClassRole.STRATEGIST);
 
+		eq.setHelmet(helmetDefault);
+		eq.setChestplate(51, 51, 51);
+		eq.setLeggings(26, 26, 26);
+		eq.setBoots(13, 13, 13);
+
 		Abilities.DECOY.addItemIfExists(eq);
 		Abilities.DECOY_WALL.addItemIfExists(eq);
 	}
@@ -86,6 +98,7 @@ public class HocusClass extends IClass implements Listener {
 
 	@Override
 	public void useUltimate(Player player) {
+		setHelmet(player, true);
 		this.setUsingUltimate(player, true, 400);
 		Chat.broadcast("&cKiller Rabbit: &fI'm here for vengeance!");
 
@@ -103,12 +116,17 @@ public class HocusClass extends IClass implements Listener {
 				setNewTarget(rabbit);
 			}
 			if (tick == 0) {
+				setHelmet(player, false);
 				Chat.broadcast("&cKiller Rabbit: &fBye bye~");
 				rabbit.remove();
 				loyalRabbit.remove(rabbit);
 			}
 		}, 20, 20);
 
+	}
+
+	private void setHelmet(Player player, boolean flag) {
+		player.getInventory().setHelmet(flag ? helmetUltimate : helmetDefault);
 	}
 
 	private void setNewTarget(Rabbit rabbit) {

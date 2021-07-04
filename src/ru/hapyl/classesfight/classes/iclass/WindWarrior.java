@@ -4,6 +4,7 @@ import kz.hapyl.spigotutils.module.player.PlayerLib;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import ru.hapyl.classesfight.ability.Abilities;
 import ru.hapyl.classesfight.classes.ClassEquipment;
@@ -20,7 +21,14 @@ public class WindWarrior extends IClass {
 		this.setInfo("Light as a leaf and fast as a samurai. Uses his wind abilities to gain control over his enemies.",
 				Abilities.WIND_STRIDER.getAbout(), "Wind Fury", "Instantly slash with your sword to create tornado and launch it forward. Enemies who get close to it will be pulled in and rapidly damaged.", 8);
 
+		this.setUltimateSound(Sound.ITEM_TRIDENT_RIPTIDE_3, 0.0f);
+
 		final ClassEquipment eq = this.getClassEquipment();
+
+		eq.setHelmet("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjJiYmNjMzc4Njc3NzIzMDYzMWExNjA3NTYyYjc4YTkwYTQ5OGYwZTI0ZTQzZmEwNmQyNzc3NWRjYTE1ZDc3ZCJ9fX0=");
+		eq.setChestplate(179, 113, 0);
+		eq.setLeggings(230, 145, 0);
+		eq.setBoots(255, 190, 77);
 
 		eq.addItem(new Weapon(Material.LILY_PAD).withName("Clover").withDamage(3.0d).build());
 		Abilities.WIND_STRIDER.addItemIfExists(eq);
@@ -39,7 +47,7 @@ public class WindWarrior extends IClass {
 			final Location location = move.getLocation();
 			final double tT = move.getTick() * 2.0d;
 			for (double y = 0.0d; y < 5.0; y += 0.5d) {
-				double yM = y / 2.0d;
+				double yM = y / 2.5d;
 				for (double t = 0.0d; t < Math.PI * (yM + 0.5d); t += Math.PI / 8) {
 					final double x = yM * Math.sin(t + tT);
 					final double z = yM * Math.cos(t + tT);

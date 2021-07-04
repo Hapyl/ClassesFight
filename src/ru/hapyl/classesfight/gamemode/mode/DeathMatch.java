@@ -7,7 +7,7 @@ import ru.hapyl.classesfight.runnable.GameTask;
 
 public class DeathMatch extends CFGameMode {
 
-    protected DeathMatch() {
+    public DeathMatch() {
         super("Death Match FFA", 300);
     }
 

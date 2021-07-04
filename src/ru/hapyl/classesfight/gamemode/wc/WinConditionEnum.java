@@ -13,10 +13,6 @@ public enum WinConditionEnum {
 		this.condition = condition;
 	}
 
-	public WinCondition getCondition() {
-		return condition;
-	}
-
 	public boolean validate(final GameManager manager) {
 		return this.condition.checkCondition(manager);
 	}

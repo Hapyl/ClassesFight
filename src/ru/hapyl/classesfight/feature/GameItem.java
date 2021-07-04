@@ -24,7 +24,7 @@ public class GameItem {
 		this.items.put(2, createItem(Material.HEART_OF_THE_SEA, "Main Menu", GameMenuGUI::new));
 		this.items.put(4, createItem(Material.CHEST, "Collection", CollectionGUI::new));
 		this.items.put(6, createItem(Material.DIAMOND, "Start Game", player -> player.performCommand("start")));
-		//this.items.put(7, createItem(Material.COMPARATOR, "Game Settings", GameSettingMenu::new));
+		this.items.put(7, createItem(Material.COMPARATOR, "Game Settings", GameSettingMenu::new));
 	}
 
 	private ItemStack createItem(Material material, String name, Consumer<Player> clickAction) {

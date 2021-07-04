@@ -24,7 +24,8 @@ public class Pyrotand extends IClass {
 
     public Pyrotand() {
         super("Arch-vile", Material.FIRE_CHARGE);
-        this.setInfo("A pyrotechnic who had an accident... that he tried not to talk about. But with power of both &cPyre &7and &9Hydro&7, makes himself a tough opponent.__" + Abilities.FIRE_BALL.getAbout() + Abilities.HOMING_WATER_BALL.getAbout(),
+        this.setInfo("A pyrotechnic who had an accident... that he tried not to talk about. But with power of both &cFire &7and &9Water&7, makes himself a tough opponent.__" + Abilities.FIRE_BALL
+                        .getAbout() + Abilities.HOMING_WATER_BALL.getAbout(),
                 "Coin Flip",
                 "Flips a coin to decide which element to use to annihilate his enemies. &eHeads &7- applies burning to all players in radius. &eTails &7- applies drowning effect, slowing enemies.", 7);
         this.setRole(ClassRole.STRATEGIST);
@@ -53,7 +54,7 @@ public class Pyrotand extends IClass {
     public void useUltimate(Player player) {
 
         final boolean bool = new Random().nextBoolean();
-        final int windUpTime = 30;
+        final int windUpTime = 20;
 
         GameEffectManager.applyEffect(player, GameEffectType.RESISTANCE, windUpTime);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999, 5));

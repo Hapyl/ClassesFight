@@ -24,6 +24,7 @@ import ru.hapyl.classesfight.database.Database;
 import ru.hapyl.classesfight.database.entry.Setting;
 import ru.hapyl.classesfight.database.entry.SettingEntry;
 import ru.hapyl.classesfight.database.entry.StatType;
+import ru.hapyl.classesfight.disaster.Disasters;
 import ru.hapyl.classesfight.experience.Experience;
 import ru.hapyl.classesfight.experience.RewardReason;
 import ru.hapyl.classesfight.feature.*;
@@ -153,6 +154,20 @@ public class GameManager {
 		for (final Abilities value : Abilities.values()) {
 			value.getAbility().onStart();
 		}
+
+		// Disasters
+		Disasters.forEach(disaster -> {
+			if (!disaster.isEnabled()) {
+				return;
+			}
+			disaster.onStart();
+			new GameTask() {
+				@Override
+				public void run() {
+					disaster.onTick();
+				}
+			}.addCancelEvent(disaster::onStop).runTaskTimer(0, 1);
+		});
 
 		// this is the impl for now since fuck armor stands
 		new HealthIndicator();

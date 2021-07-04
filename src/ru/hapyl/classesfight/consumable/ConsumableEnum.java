@@ -5,16 +5,16 @@ import ru.hapyl.classesfight.consumable.consume.Soda;
 
 public enum ConsumableEnum {
 
-    BURGER(new Burger()),
-    SODA(new Soda());
+	BURGER(new Burger()),
+	SODA(new Soda());
 
-    private final Consumable consumable;
+	private final Consumable consumable;
 
-    ConsumableEnum(Consumable burger) {
-        this.consumable = burger;
-    }
+	ConsumableEnum(Consumable burger) {
+		this.consumable = burger;
+	}
 
-    public Consumable getConsumable() {
-        return consumable;
-    }
+	public Consumable getConsumable() {
+		return consumable;
+	}
 }

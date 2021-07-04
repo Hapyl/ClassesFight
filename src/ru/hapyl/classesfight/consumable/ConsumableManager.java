@@ -108,7 +108,7 @@ public class ConsumableManager implements Listener, Singleton {
 		if (entity instanceof ArmorStand
 				&& !Spectator.isSpectator(player)) {
 
-			final Consumable consumable = this.checkAndGet((ArmorStand) entity);
+			final Consumable consumable = this.checkAndGet((ArmorStand)entity);
 
 			if (consumable == null) {
 				return;

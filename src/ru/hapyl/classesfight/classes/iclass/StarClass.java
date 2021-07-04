@@ -113,7 +113,7 @@ public class StarClass extends IClass {
 						}
 						((LivingEntity)entity).setMaximumNoDamageTicks(0);
 						if (entity instanceof Player) {
-							DamageFeature.damage((Player)entity, player, THOUSANDS_SLASH_DAMAGE, EnumDamageCause.ENTITY_ATTACK, true);
+							DamageFeature.damage((Player)entity, player, THOUSANDS_SLASH_DAMAGE, EnumDamageCause.SOTS, true);
 						}
 						else {
 							((LivingEntity)entity).damage(THOUSANDS_SLASH_DAMAGE, player);
@@ -256,7 +256,7 @@ public class StarClass extends IClass {
 		GameUtils.tracePath(start, finish, 1.0d, SLASH_DAMAGE_DISTANCE, executor,
 				touch -> DamageFeature.damage(touch, executor, (ultimateStar ?
 						SLASH_DAMAGE * 2 :
-						SLASH_DAMAGE), EnumDamageCause.ENTITY_ATTACK, true), loc -> {
+						SLASH_DAMAGE), EnumDamageCause.STAR_SLASH, true), loc -> {
 					final World world = loc.getWorld();
 					if (world == null) {
 						return; // ?

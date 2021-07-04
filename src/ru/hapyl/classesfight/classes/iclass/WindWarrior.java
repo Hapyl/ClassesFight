@@ -62,7 +62,7 @@ public class WindWarrior extends IClass {
 				}
 				target.setVelocity(location.toVector().subtract(target.getLocation().toVector()).multiply(0.45d));
 				if (move.getTick() % 2.5d == 0) {
-					DamageFeature.damage(target, player, 4.5d, EnumDamageCause.ENTITY_ATTACK);
+					DamageFeature.damage(target, player, 4.5d, EnumDamageCause.TORNADO);
 				}
 			});
 		}, null);

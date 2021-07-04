@@ -50,8 +50,6 @@ public class LobbyParkour extends Parkour {
         this.setCompletionRewards(45 * 1000, () -> 10000);
         this.setCompletionRewards(60 * 1000, () -> 2500);
 
-
-        // TODO: 015. 05/15/2021 - Use trigger
     }
 
 }

@@ -3,8 +3,6 @@ package ru.hapyl.classesfight.ability.storage;
 import kz.hapyl.spigotutils.module.math.Geometry;
 import kz.hapyl.spigotutils.module.math.gometry.Draw;
 import kz.hapyl.spigotutils.module.math.gometry.Quality;
-import kz.hapyl.spigotutils.module.math.gometry.WorldParticle;
-import kz.hapyl.spigotutils.module.particle.ParticleBuilder;
 import kz.hapyl.spigotutils.module.player.PlayerLib;
 import kz.hapyl.spigotutils.module.util.BukkitUtils;
 import org.bukkit.*;
@@ -21,7 +19,6 @@ import ru.hapyl.classesfight.ability.Response;
 import ru.hapyl.classesfight.feature.DamageFeature;
 import ru.hapyl.classesfight.feature.EnumDamageCause;
 import ru.hapyl.classesfight.runnable.GameTask;
-import ru.hapyl.classesfight.utils.ParticlesBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -124,7 +121,7 @@ public class MoonPillar extends Ability {
                     world.spawnParticle(Particle.HEART, ((Player)player).getEyeLocation().clone().add(0, 0.5d, 0), 1, 0, 0, 0, 0);
                 }
                 else {
-                    DamageFeature.damage((Player)player, owner, 2.0d, EnumDamageCause.ENTITY_ATTACK);
+                    DamageFeature.damage((Player)player, owner, 2.0d, EnumDamageCause.MOON_PILLAR);
                     player.setVelocity(player.getLocation().getDirection().multiply(-0.5).setY(0.25d));
                 }
             });

@@ -110,7 +110,7 @@ public class ArcherClass extends IClass implements Listener {
 			}
 
 			if (boomArrow.contains(arrow)) {
-				executeUltimateExplosion(player, arrow.getLocation());
+				executeUltimateExplosion(arrow.getLocation());
 				boomArrow.remove(arrow);
 			}
 
@@ -169,8 +169,8 @@ public class ArcherClass extends IClass implements Listener {
 		}
 	}
 
-	public void executeUltimateExplosion(Player player, Location at) {
-		GameUtils.createFakeExplosion(at, 6, BOOM_BOW_DAMAGE, player, EnumDamageCause.BOOM_BOW_ULTIMATE);
+	public void executeUltimateExplosion(Location at) {
+		GameUtils.createFakeExplosion(at, 6, BOOM_BOW_DAMAGE, null, EnumDamageCause.BOOM_BOW_ULTIMATE);
 	}
 
 

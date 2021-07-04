@@ -139,7 +139,7 @@ public class GlobalListener implements Listener {
 		}
 
 		// Check for Invisibility
-		if (GameEffectManager.playerHasEffect(damager, GameEffectType.INVISIBILITY)) {
+		if (damager != whoGotHit && GameEffectManager.playerHasEffect(damager, GameEffectType.INVISIBILITY)) {
 			Chat.sendTitle(damager, "", "&cCannot damage while Invisible!", 0, 10, 5);
 			ev.setCancelled(true);
 			return;

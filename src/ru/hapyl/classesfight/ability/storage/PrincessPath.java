@@ -99,7 +99,7 @@ public class PrincessPath extends Ability implements Listener, PrincessCrown {
 				GameUtils.getPlayerInRange(location, 0.5d)
 						.forEach(target -> {
 							DamageFeature.setLastDamager(target, player);
-							DamageFeature.damageTick(target, null, 0.5d, EnumDamageCause.ENTITY_ATTACK, period);
+							DamageFeature.damageTick(target, null, 0.5d, EnumDamageCause.GOLDEN_PATH, period);
 						});
 			}
 

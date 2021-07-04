@@ -50,7 +50,7 @@ public class Darkness extends Ability implements GrimoireCooldownApplier {
 				}
 				PlayerLib.playSound(location, Sound.BLOCK_STONE_STEP, 0.0f);
 				GameEffectManager.applyEffect(target, GameEffectType.PARANOIA, 10);
-				DamageFeature.damage(target, player, Instance.LIBRARIAN.calculateDamage(player, 2.0d), EnumDamageCause.ENTITY_ATTACK);
+				DamageFeature.damage(target, player, Instance.LIBRARIAN.calculateDamage(player, 2.0d), EnumDamageCause.DARKNESS);
 			});
 
 			//location.subtract(x, y, z);

@@ -118,7 +118,7 @@ public class SwooperClass extends IClass implements Listener {
 		}
 		player.setCooldown(Material.WOODEN_HOE, isUsingUltimate(player) ? rifleCooldown / 2 : rifleCooldown);
 		PlayerLib.playSound(Sound.ENTITY_GENERIC_EXPLODE, 2.0f);
-		GameUtils.rayTraceLine(player, (player.isSneaking() ? 50 : 25), 0.5d, (player.isSneaking() ? 8.0 : 4.0), EnumDamageCause.ENTITY_ATTACK,
+		GameUtils.rayTraceLine(player, (player.isSneaking() ? 50 : 25), 0.5d, (player.isSneaking() ? 8.0 : 4.0), EnumDamageCause.RIFLE,
 				move -> PlayerLib.spawnParticle(move, Particle.FIREWORKS_SPARK, 1, 0, 0, 0, 0), null);
 	}
 
@@ -217,7 +217,7 @@ public class SwooperClass extends IClass implements Listener {
 				.getNearbyEntities(location, blowDist, blowDist * 0.5f, blowDist, entity -> entity instanceof Player);
 		players.forEach(target -> {
 			if (target != player) {
-				DamageFeature.damage((Player)target, player, 2.0d, EnumDamageCause.ENTITY_ATTACK);
+				DamageFeature.damage((Player)target, player, 2.0d, EnumDamageCause.SATCHEL);
 			}
 			else {
 				GameEffectManager.applyEffect(player, GameEffectType.FALL_DAMAGE_RESISTANCE, 40, true);

@@ -216,56 +216,42 @@ public class AlchemistClass extends IClass implements Listener {
 		int randomOther = (int)(Math.random() * 6);
 
 		switch (randomSelf) {
-			case 0:
+			case 0 -> {
 				applyEffect(player, SPEED, 30, 2);
 				player.sendMessage(ChatColor.GREEN + "Alchemical Madness gave you SPEED effect!");
-				break;
-			case 1:
+			}
+			case 1 -> {
 				applyEffect(player, PotionEffectType.JUMP, 30, 1);
 				player.sendMessage(ChatColor.GREEN + "Alchemical Madness gave you JUMP BOOST effect!");
-				break;
-			case 2:
+			}
+			case 2 -> {
 				applyEffect(player, PotionEffectType.INCREASE_DAMAGE, 30, 2);
 				player.sendMessage(ChatColor.GREEN + "Alchemical Madness gave you STRENGTH effect!");
-				break;
-			case 3:
+			}
+			case 3 -> {
 				GameEffectManager.applyEffect(player, GameEffectType.RESISTANCE, 30 * 20);
 				//                applyEffect(player, PotionEffectType.DAMAGE_RESISTANCE, 30, 2);
 				player.sendMessage(ChatColor.GREEN + "Alchemical Madness gave you RESISTANCE!");
-				break;
-			case 4:
+			}
+			case 4 -> {
 				GameEffectManager.applyEffect(player, GameEffectType.INVISIBILITY, 30 * 20);
-				applyEffect(player, PotionEffectType.INVISIBILITY, 30, 1);
+				applyEffect(player, PotionEffectType.INVISIBILITY, 10, 1);
 				player.sendMessage(ChatColor.GREEN + "Alchemical Madness gave you INVISIBILITY effect!");
-				break;
-			case 5:
-				DamageFeature.setHealth(player, this.getHealth().getValue());
+			}
+			case 5 -> {
+				DamageFeature.setHealth(player, this.getHealth().getValue() / 2);
 				//                applyEffect(player, PotionEffectType.HEAL, 1, 10);
 				player.sendMessage(ChatColor.GREEN + "Alchemical Madness healed you!");
-				break;
-
+			}
 		}
 
 		switch (randomOther) {
-			case 0:
-				applyUltimateCurse(player, PotionEffectType.POISON, 15, 0, "POISON");
-				break;
-			case 1:
-				applyUltimateCurse(player, PotionEffectType.BLINDNESS, 15, 1, "BLINDNESS");
-				break;
-			case 2:
-				applyUltimateCurse(player, PotionEffectType.WITHER, 7, 1, "WITHER");
-				break;
-			case 3:
-				applyUltimateCurse(player, PotionEffectType.SLOW, 15, 2, "SLOWNESS");
-				break;
-			case 4:
-				applyUltimateCurse(player, PotionEffectType.WEAKNESS, 15, 2, "WEAKNESS");
-				break;
-			case 5:
-				applyUltimateCurse(player, PotionEffectType.CONFUSION, 15, 1, "NAUSEA");
-				break;
-
+			case 0 -> applyUltimateCurse(player, PotionEffectType.POISON, 15, 0, "POISON");
+			case 1 -> applyUltimateCurse(player, PotionEffectType.BLINDNESS, 15, 1, "BLINDNESS");
+			case 2 -> applyUltimateCurse(player, PotionEffectType.WITHER, 7, 1, "WITHER");
+			case 3 -> applyUltimateCurse(player, PotionEffectType.SLOW, 15, 2, "SLOWNESS");
+			case 4 -> applyUltimateCurse(player, PotionEffectType.WEAKNESS, 15, 2, "WEAKNESS");
+			case 5 -> applyUltimateCurse(player, PotionEffectType.CONFUSION, 15, 1, "NAUSEA");
 		}
 
 	}

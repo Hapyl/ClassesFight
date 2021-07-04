@@ -73,7 +73,7 @@ public class StartedClass extends IClass {
                             if (range == player) {
                                 return;
                             }
-                            DamageFeature.damageTick(range, player, 3.0d, EnumDamageCause.ENTITY_ATTACK, 10);
+                            DamageFeature.damageTick(range, player, 3.0d, EnumDamageCause.SWEEP, 10);
                         });
                         location.subtract(x, 1, z);
 
@@ -98,7 +98,7 @@ public class StartedClass extends IClass {
 
         GameTask.runTaskTimerTimes((task, tick) -> {
 
-            GameUtils.getPlayerInRange(location, distance).forEach(target -> DamageFeature.damage(target, player, 1.0d, EnumDamageCause.ENTITY_ATTACK));
+            GameUtils.getPlayerInRange(location, distance).forEach(target -> DamageFeature.damage(target, player, 1.0d, EnumDamageCause.RAINFIRE));
 
             for (double d = 0.0d; d < Math.PI * 2; d += Math.PI / 16) {
                 final double x = distance * (Math.sin(d));

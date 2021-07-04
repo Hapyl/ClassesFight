@@ -15,7 +15,18 @@ public abstract class VarArgsGameEffect<T extends Number> implements GameEffect 
 
 	public abstract void onEffectStarts(Player player, T t);
 
+	public void onEffectUpdates(Player player, T t) {
+
+	}
+
 	@Override
+	@SuppressWarnings("all")
+	public final void onEffectUpdate(Player player, Object... extra) {
+		this.onEffectUpdates(player, (T)extra[0]);
+	}
+
+	@Override
+	@SuppressWarnings("all")
 	public final void onEffectStart(Player player, Object... extra) {
 		this.onEffectStarts(player, (T)extra[0]);
 	}

@@ -1,7 +1,5 @@
 package ru.hapyl.classesfight.ability.storage;
 
-import kz.hapyl.spigotutils.module.chat.Gradient;
-import kz.hapyl.spigotutils.module.chat.gradient.Interpolators;
 import kz.hapyl.spigotutils.module.player.PlayerLib;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -24,7 +22,6 @@ import ru.hapyl.classesfight.gameeffect.GameEffectType;
 import ru.hapyl.classesfight.runnable.GameTask;
 import ru.hapyl.classesfight.utils.GameUtils;
 
-import java.awt.*;
 import java.util.Locale;
 
 public class Submerge extends Ability {
@@ -104,7 +101,7 @@ public class Submerge extends Ability {
 					return;
 				}
 
-				DamageFeature.damageEntity(target, player, 3.0d, EnumDamageCause.ENTITY_ATTACK);
+				DamageFeature.damageEntity(target, player, 3.0d, EnumDamageCause.SUBMERGE);
 				target.setVelocity(target.getLocation().getDirection().multiply(-1).setY(0.5d));
 
 			});

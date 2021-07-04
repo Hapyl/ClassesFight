@@ -65,7 +65,6 @@ public class Librarian extends IClass implements Listener {
 	}
 
 	private void useStaff(Player player) {
-
 		if (player.hasCooldown(Material.NETHERITE_SHOVEL)) {
 			return;
 		}
@@ -222,7 +221,8 @@ public class Librarian extends IClass implements Listener {
 					if (target == player) {
 						PlayerLib.addEffect(target, PotionEffectType.SPEED, 20, 1);
 						PlayerLib.addEffect(target, PotionEffectType.INCREASE_DAMAGE, 20, 1);
-					} else {
+					}
+					else {
 						PlayerLib.addEffect(target, PotionEffectType.GLOWING, 20, 1);
 					}
 				});

@@ -76,7 +76,8 @@ public class FlowerEscape extends Ability {
                         }
                     });
 
-                    GameUtils.getPlayerInRange(location, flowerRadius).forEach(target -> DamageFeature.damage(target, player, finalDamage, EnumDamageCause.ENTITY_ATTACK));
+                    GameUtils.getPlayerInRange(location, flowerRadius)
+                            .forEach(target -> DamageFeature.damage(target, player, finalDamage, EnumDamageCause.FLOWER));
 
                     PlayerLib.playSound(location, Sound.ENTITY_ENDER_DRAGON_FLAP, 1.75f);
                     final float pitch = Math.min(0.5f + ((0.1f * (((float)flowerLifeTicks - tick) / 20))), 2.0f);

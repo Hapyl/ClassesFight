@@ -1,6 +1,5 @@
 package ru.hapyl.classesfight;
 
-import kz.hapyl.spigotutils.module.annotate.NOTNULL;
 import kz.hapyl.spigotutils.module.chat.Chat;
 import kz.hapyl.spigotutils.module.player.PlayerLib;
 import kz.hapyl.spigotutils.module.scoreboard.ScoreboardBuilder;
@@ -36,8 +35,6 @@ public class GameUI implements GameElement, Runnable {
 	private long startTime;
 	private int gameUptime;
 	private int gameFrame;
-
-	// FIXME: 025. 06/25/2021 - abilities
 
 	private final String gameName;
 

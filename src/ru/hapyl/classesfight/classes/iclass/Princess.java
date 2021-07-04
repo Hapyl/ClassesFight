@@ -135,7 +135,7 @@ public class Princess extends IClass implements PrincessCrown {
 				entity.remove();
 				PlayerLib.spawnParticle(location, Particle.EXPLOSION_LARGE, 1, 0, 0, 0, 0);
 				PlayerLib.playSound(Sound.ENTITY_GENERIC_EXPLODE, 1.5f);
-				GameUtils.createFakeExplosion(location, radius, damage, player, EnumDamageCause.ENTITY_ATTACK);
+				GameUtils.createFakeExplosion(location, radius, damage, player, EnumDamageCause.STARFALL);
 				return;
 			}
 

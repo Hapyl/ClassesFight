@@ -55,8 +55,6 @@ public class ActionbarUI implements Ticking, GameElement {
 
 	private String buildUIElement() {
 
-		// TODO: 025. 06/25/2021 - Effects; Though is there really a point of it since there is TAB?
-
 		final StringBuilder builder = new StringBuilder();
 		final long combatTime = DamageFeature.getCombatTime(player);
 

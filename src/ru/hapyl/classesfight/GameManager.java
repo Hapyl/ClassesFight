@@ -288,8 +288,6 @@ public class GameManager {
 			player.teleport(GameMap.getCurrentMap().getLocation());
 		}
 
-		// FIXME: 019. 06/19/2021 - spec invis
-
 		// Kills thing
 		this.mvpPlayer = this.getRandomInGamePlayer();
 		this.playerKills.clear();

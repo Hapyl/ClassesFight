@@ -233,7 +233,6 @@ public class DarkMageClass extends IClass implements Listener {
 
 	@EventHandler()
 	public void handleWitherSkullHit(ProjectileHitEvent ev) {
-
 		if (!(ev.getEntity() instanceof final WitherSkull skull) || !(ev.getEntity().getShooter() instanceof Player)) {
 			return;
 		}
@@ -241,7 +240,7 @@ public class DarkMageClass extends IClass implements Listener {
 		final Player player = (Player)skull.getShooter();
 		final Location location = skull.getLocation();
 
-		GameUtils.getPlayerInRange(location, 3.0d).forEach(target -> DamageFeature.damage(target, player, 4.0d, EnumDamageCause.ENTITY_ATTACK));
+		GameUtils.getPlayerInRange(location, 3.0d).forEach(target -> DamageFeature.damage(target, player, 4.0d, EnumDamageCause.WITHER_SKULLED));
 
 	}
 

@@ -99,7 +99,7 @@ public class Moonwalker extends IClass {
 		final Location playerLocation = getTargetBlock(player).getRelative(BlockFace.UP).getLocation().clone().add(0.5d, 0.0d, 0.5d);
 		final Location startLocation = playerLocation.clone().add(distance, distance, distance);
 
-		playerLocation.getWorld().playSound(playerLocation, Sound.ENTITY_WITHER_DEATH, 50, 0.0f);
+		PlayerLib.playSound(player, Sound.ENTITY_WITHER_DEATH, 0.0f);
 
 		new GameTask() {
 			private int tick = 0;
@@ -162,7 +162,7 @@ public class Moonwalker extends IClass {
 				.filter(g -> g instanceof Player)
 				.forEach(player -> {
 					GameEffectManager.applyEffect((Player)player, GameEffectType.CORROSION, corrosionTime);
-					DamageFeature.damage((Player)player, executor, 20.0d, EnumDamageCause.ENTITY_ATTACK);
+					DamageFeature.damage((Player)player, executor, 20.0d, EnumDamageCause.METEORITE);
 				});
 	}
 

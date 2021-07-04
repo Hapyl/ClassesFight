@@ -26,10 +26,10 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import ru.hapyl.classesfight.GameManager;
 import ru.hapyl.classesfight.GarbageCollector;
-import ru.hapyl.classesfight.classes.ClassManager;
-import ru.hapyl.classesfight.classes.EnumInfo;
 import ru.hapyl.classesfight.classes.ClassEquipment;
+import ru.hapyl.classesfight.classes.ClassManager;
 import ru.hapyl.classesfight.classes.ClassRating;
+import ru.hapyl.classesfight.classes.EnumInfo;
 import ru.hapyl.classesfight.event.PlayerDamageByPlayerEvent;
 import ru.hapyl.classesfight.feature.DamageFeature;
 import ru.hapyl.classesfight.feature.EnumDamageCause;
@@ -188,7 +188,7 @@ public class ShadowWarrior extends IClass implements Listener {
 				// Used entity for testing since im lonely
 				final Location location = player.getLocation();
 				if (nearest instanceof Player) {
-					DamageFeature.damage((Player)nearest, player, ULTIMATE_DAMAGE, EnumDamageCause.ENTITY_ATTACK);
+					DamageFeature.damage((Player)nearest, player, ULTIMATE_DAMAGE, EnumDamageCause.NEVERMISS);
 					player.setCooldown(Material.IRON_SWORD, ULTIMATE_COOLDOWN);
 				}
 				player.playSound(location, Sound.BLOCK_NETHER_ORE_BREAK, SoundCategory.RECORDS, 5, 1.75f);
@@ -227,7 +227,7 @@ public class ShadowWarrior extends IClass implements Listener {
 				if (nearest != null) {
 					// Used entity for testing since im lonely
 					if (nearest instanceof Player) {
-						DamageFeature.damage((Player)nearest, player, ULTIMATE_DAMAGE, EnumDamageCause.ENTITY_ATTACK);
+						DamageFeature.damage((Player)nearest, player, ULTIMATE_DAMAGE, EnumDamageCause.NEVERMISS);
 						player.setCooldown(Material.IRON_SWORD, ULTIMATE_COOLDOWN);
 					}
 					player.playSound(player.getLocation(), Sound.BLOCK_NETHER_ORE_BREAK, SoundCategory.RECORDS, 5, 1.75f);

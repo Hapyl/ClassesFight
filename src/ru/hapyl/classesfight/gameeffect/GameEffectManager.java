@@ -87,6 +87,7 @@ public class GameEffectManager {
 			for (ActiveGameEffect actEffect : alreadyActive) {
 				// Player has effect
 				if (actEffect.getType() == effectType) {
+					actEffect.getType().getEffect().onEffectUpdate(player, extra);
 					// If override replace with new ticks
 					if (override) {
 						actEffect.setTicksRemaining(lengthTicks);

@@ -7,7 +7,6 @@ import ru.hapyl.classesfight.ability.cooldown.Cooldown;
 
 import java.util.function.Consumer;
 
-// FIXME: 021. 06/21/2021 _
 public class AbilitiesCooldown {
 
 	public static void add(final Player player, String name, String cdKey, int ticks, Consumer<Player> finish) {

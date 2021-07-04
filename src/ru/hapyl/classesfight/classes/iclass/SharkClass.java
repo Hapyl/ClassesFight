@@ -9,15 +9,14 @@ import org.bukkit.entity.EvokerFangs;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import ru.hapyl.classesfight.GameManager;
 import ru.hapyl.classesfight.GarbageCollector;
 import ru.hapyl.classesfight.ability.Abilities;
-import ru.hapyl.classesfight.classes.ClassManager;
 import ru.hapyl.classesfight.classes.ClassEquipment;
+import ru.hapyl.classesfight.classes.ClassManager;
 import ru.hapyl.classesfight.classes.ClassRating;
 import ru.hapyl.classesfight.event.PlayerDamageByPlayerEvent;
 import ru.hapyl.classesfight.feature.DamageFeature;
@@ -75,7 +74,7 @@ public class SharkClass extends IClass implements Listener {
             this.lastCrit.put(player, System.currentTimeMillis());
             GarbageCollector.spawnEntity(entity.getLocation(), EvokerFangs.class, me -> {
                 me.setOwner(player);
-                DamageFeature.damageEntity(entity, player, 2.0d, EnumDamageCause.ENTITY_ATTACK);
+                DamageFeature.damageEntity(entity, player, 2.0d, EnumDamageCause.FEET_ATTACK);
             });
         }
     }

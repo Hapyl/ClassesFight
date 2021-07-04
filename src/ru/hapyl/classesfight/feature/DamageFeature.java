@@ -2,6 +2,8 @@ package ru.hapyl.classesfight.feature;
 
 import kz.hapyl.spigotutils.module.annotate.Super;
 import kz.hapyl.spigotutils.module.chat.Chat;
+import kz.hapyl.spigotutils.module.chat.Gradient;
+import kz.hapyl.spigotutils.module.chat.gradient.Interpolators;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -27,10 +29,10 @@ import ru.hapyl.classesfight.gameeffect.GameEffectType;
 import ru.hapyl.classesfight.stats.StatsContainer;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-// FIXME: 025. 06/25/2021 - rework me
 public class DamageFeature {
 
 	public static final double abstractNullDamage = 0.03;
@@ -229,60 +231,37 @@ public class DamageFeature {
 	public static void handleKillAndMessage(Player player, Player damager, EnumDamageCause cause) {
 
 		final Experience experience = Experience.getInstance();
-		String deathMessage = Chat.format("&c☠ " + player.getName() + " ");
-
-		// make sure not to apply certain things if self-damage
-		if (damager == player) {
-			damager = null;
-		}
+		String deathMessage = Chat.format("☠ " + player.getName() + " ");
 
 		if (damager != null) {
 
-			Database database = Database.getDatabase(damager);
+			// Don't award coins for suicide
+			if (damager != player) {
+				Database database = Database.getDatabase(damager);
 
-			experience.rewardPlayer(damager, true, RewardReason.KILL);
-			addKillFor(damager);
+				experience.rewardPlayer(damager, true, RewardReason.KILL);
+				addKillFor(damager);
 
-			final StatisticsEntry entry = database.getStatistics();
-			final ClassManager damagerClass = ClassManager.getClass(damager);
+				final StatisticsEntry entry = database.getStatistics();
+				final ClassManager damagerClass = ClassManager.getClass(damager);
 
-			entry.addStat(StatType.KILLS, 1);
-			entry.addClassKills(damagerClass, 1);
+				entry.addStat(StatType.KILLS, 1);
+				entry.addClassKills(damagerClass, 1);
 
-			// global
-			StatsContainer.current().addClassStat(damagerClass, StatsContainer.ClassStat.KILL, 1);
-			database.getCoinsEntry().grantCoins(GameManager.current().getCoinsKill(), true, "Kill");
+				// global
+				StatsContainer.current().addClassStat(damagerClass, StatsContainer.ClassStat.KILL, 1);
+				database.getCoinsEntry().grantCoins(GameManager.current().getCoinsKill(), true, "Kill");
 
-			// fx kill effect
-			final EnumEffect effect = database.getCosmetics().getCurrentEffect(EnumEffect.Type.KILL);
-			if (effect != null && effect.isEnabled(player)) {
-				// use effect AT player who got killed, not who's effect it is.
-				effect.display(player);
+				// fx kill effect
+				final EnumEffect effect = database.getCosmetics().getCurrentEffect(EnumEffect.Type.KILL);
+				if (effect != null && effect.isEnabled(player)) {
+					// use effect AT player who got killed, not who's effect it is.
+					effect.display(player);
+				}
 			}
 		}
 
-		// TODO: 016. 06/16/2021 -> Automate and add more causes
-
-		switch (cause) {
-			case POISON -> deathMessage = concat(deathMessage, "poisoned to death", "by", damager);
-			case ENTITY_EXPLOSION -> deathMessage = concat(deathMessage, "", "", damager);
-			case VOID -> deathMessage = concat(deathMessage, "fell into the void", "", null);
-			case LEASHED -> deathMessage = concat(deathMessage, "leashed to death", "by", damager);
-			case SOUL_WHISPER -> deathMessage = concat(deathMessage, String.format("has entered %s's souls collection", damager.getName()), "", null);
-			case SHOCK_DART -> deathMessage = concat(deathMessage, "got shocked", "by", damager);
-			case NOVA_EXPLOSION -> deathMessage = concat(deathMessage, "has been spit into", "atoms by", damager);
-			case CREEPER_EXPLOSION -> deathMessage = concat(deathMessage, "'sploded by lovely friend", "of", damager);
-			case BOOM_BOW_ULTIMATE -> deathMessage = concat(deathMessage, "went out with a BIG BOOM", "of", damager);
-			case FIRE_SPRAY -> deathMessage = concat(deathMessage, "got sptrayed so fire", "by", damager);
-			case FIRE_MOLOTOV -> deathMessage = concat(deathMessage, "couldn't find a way out", "from", damager);
-			case FROZEN_WEAPON -> deathMessage = concat(deathMessage, "has been frozen to death", "by", damager);
-			case FALL -> deathMessage = concat(deathMessage, "fell to their death", "while escaping from", damager);
-			case FIRE_TICK, FIRE, LAVA -> deathMessage = concat(deathMessage, "got toasted", "with a pain from", damager);
-			case ENTITY_ATTACK -> deathMessage = concat(deathMessage, "was killed", "by", damager);
-			case PROJECTILE -> deathMessage = concat(deathMessage, "was shot", "by", damager);
-			default -> deathMessage = concat(deathMessage, "died", "from unknown causes of", damager);
-		}
-
+		deathMessage = new Gradient(concat(deathMessage, cause.getRandomIfMultiple(), damager)).rgb(new Color(160, 0, 0), new Color(255, 51, 51), Interpolators.LINEAR);
 		Bukkit.broadcastMessage(deathMessage);
 
 	}
@@ -308,6 +287,21 @@ public class DamageFeature {
 		return entity.getName();
 	}
 
+	private static String concat(String original, DeathMessage message, Entity killer) {
+		String suffix = "";
+		if (killer != null) {
+			final String pronoun = getValidPronoun(killer);
+			if (!message.hasSuffix()) {
+				return original + message.formatMessage(pronoun);
+			}
+			else {
+				suffix = message.getDamagerSuffix() + " " + pronoun;
+			}
+		}
+		return original + message.getMessage() + " " + suffix;
+	}
+
+	@Deprecated
 	private static String concat(String original, String message, String killerSuffix, Entity killer) {
 		return original.concat(message + (killer == null ? "" : " " + killerSuffix + " " + getValidPronoun(killer)) + ".");
 	}

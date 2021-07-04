@@ -72,7 +72,7 @@ public class BlackHole extends Ability implements GrimoireCooldownApplier {
 						.multiply(0.20d));
 
 				if (tick % 20 == 0) {
-					DamageFeature.damageEntity(entity, player, Instance.LIBRARIAN.calculateDamage(player, 3.0d), EnumDamageCause.ENTITY_ATTACK);
+					DamageFeature.damageEntity(entity, player, Instance.LIBRARIAN.calculateDamage(player, 3.0d), EnumDamageCause.BLACK_HOLE);
 					PlayerLib.spawnParticle(entity.getLocation(), Particle.SWEEP_ATTACK, 1, 0, 0, 0, 0);
 					PlayerLib.playSound(entity.getLocation().add(0.0d, 1.0d, 0.0d), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 1.25f);
 				}

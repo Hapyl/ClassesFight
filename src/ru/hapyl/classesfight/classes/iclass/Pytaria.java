@@ -13,9 +13,9 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
 import ru.hapyl.classesfight.GarbageCollector;
 import ru.hapyl.classesfight.ability.Abilities;
-import ru.hapyl.classesfight.classes.EnumInfo;
 import ru.hapyl.classesfight.classes.ClassEquipment;
 import ru.hapyl.classesfight.classes.ClassRating;
+import ru.hapyl.classesfight.classes.EnumInfo;
 import ru.hapyl.classesfight.event.PlayerDamageByPlayerEvent;
 import ru.hapyl.classesfight.feature.DamageFeature;
 import ru.hapyl.classesfight.feature.EnumDamageCause;
@@ -30,7 +30,8 @@ public class Pytaria extends IClass {
         super("Pytaria", Material.POPPY);
         this.setHealth(EnumInfo.HIGH);
         this.setRole(ClassRole.ASSASSIN);
-        this.setInfo("Beautiful, but deadly opponent with addiction to flowers. She suffered all her youth, which at the end, made her only stronger.__" + Abilities.FLOWER_ESCAPE.getAbout() + Abilities.FLOWER_BREEZE.getAbout(),
+        this.setInfo("Beautiful, but deadly opponent with addiction to flowers. She suffered all her youth, which at the end, made her only stronger.__" + Abilities.FLOWER_ESCAPE
+                        .getAbout() + Abilities.FLOWER_BREEZE.getAbout(),
                 "Feel the Breeze",
                 "Summons a blooming bee in front of her, that locks to a closest enemy and deals damage (if then don't have any cover) that depends on how low her health is and regenerates &b" + healthRegenPercent + "% &7of missing health.", 7);
 
@@ -135,13 +136,11 @@ public class Pytaria extends IClass {
                     pig.remove();
                     this.cancel();
 
-                    GameUtils.getPlayerInRange(touchLocation, 1.5d).forEach(target -> {
-                        DamageFeature.damage(target, player, finalDamage, EnumDamageCause.ENTITY_ATTACK, true);
-                    });
+                    GameUtils.getPlayerInRange(touchLocation, 1.5d)
+                            .forEach(target -> DamageFeature.damage(target, player, finalDamage, EnumDamageCause.FELL_THE_BREEZE, true));
 
                     PlayerLib.spawnParticle(touchLocation, Particle.EXPLOSION_LARGE, 3, 0.5, 0, 0.5, 0);
                     PlayerLib.playSound(touchLocation, Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1.25f);
-                    return;
                 }
 
             }

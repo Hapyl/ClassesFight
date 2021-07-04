@@ -129,7 +129,7 @@ public class Element {
                     if (!range.isEmpty()) {
                         entityPoof();
                         range.forEach(target -> {
-                            DamageFeature.damage(target, player, type.getDamage(), EnumDamageCause.ENTITY_ATTACK);
+                            DamageFeature.damage(target, player, type.getDamage(), EnumDamageCause.GRAVITY_GUN);
                             final Action<Player> effect = type.getEffect();
                             if (effect != null) {
                                 effect.use(target);

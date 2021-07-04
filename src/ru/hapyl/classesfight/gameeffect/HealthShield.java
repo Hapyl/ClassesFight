@@ -9,8 +9,12 @@ public class HealthShield extends VarArgsGameEffect<Double> {
 
 	@Override
 	public void onEffectStarts(Player player, Double d) {
-		// FIXME: 030. 06/30/2021 -> does not reset when applying when already applied
 		setValue(player, d);
+	}
+
+	@Override
+	public void onEffectUpdates(Player player, Double aDouble) {
+		setValue(player, aDouble);
 	}
 
 	@Override

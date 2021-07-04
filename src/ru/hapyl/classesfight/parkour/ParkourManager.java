@@ -168,8 +168,6 @@ public class ParkourManager implements Runnable {
 		final long finishedAt = data.getFinishedAt();
 		final String format = new SimpleDateFormat("mm:ss.SS").format(finishedAt);
 
-		// FIXME: 006. 06/06/2021 - Maybe change to be consistent
-
 		final Record record = tempRecord.get(player);
 		if (record != null) {
 			record.setFinished(true);

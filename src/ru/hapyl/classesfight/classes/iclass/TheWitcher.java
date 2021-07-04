@@ -19,8 +19,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import ru.hapyl.classesfight.ability.Abilities;
 import ru.hapyl.classesfight.ability.storage.Kven;
-import ru.hapyl.classesfight.classes.ClassManager;
 import ru.hapyl.classesfight.classes.ClassEquipment;
+import ru.hapyl.classesfight.classes.ClassManager;
 import ru.hapyl.classesfight.classes.ClassRating;
 import ru.hapyl.classesfight.classes.iclass.extra.Combo;
 import ru.hapyl.classesfight.event.PlayerDamageByPlayerEvent;
@@ -51,8 +51,7 @@ public class TheWitcher extends IClass implements Listener {
 						.getAbout() + Abilities.IGNY.getAbout() + Abilities.KVEN.getAbout() + Abilities.AKCIY.getAbout() + Abilities.IRDEN.getAbout(),
 				"All the Trainings",
 				String.format("Remember all your trainings and unleash them at once. Creating infinite %1$s shield and %2$s aura that follows you for &b10s&7. Both %1$s and %2$s starts their cooldowns.", Abilities.KVEN
-						.getName(), Abilities.IRDEN.getName()),
-				8);
+						.getName(), Abilities.IRDEN.getName()), 8);
 
 		this.setRating(ClassRating.S);
 		this.setLvlRequired(4);
@@ -84,7 +83,6 @@ public class TheWitcher extends IClass implements Listener {
 	public void processDamageEventAsVictim(Player player, PlayerDamageByPlayerEvent event) {
 		final Kven kven = (Kven)Abilities.KVEN.getAbility();
 
-		// FIXME: 024. 05/24/2021 - Double shield damage thing
 		if (event.getDamage() <= 1.0d) {
 			return;
 		}
@@ -112,7 +110,7 @@ public class TheWitcher extends IClass implements Listener {
 	public double testAndCalculateDamage(Player player, double initDamage) {
 
 		double damage = initDamage;
-		final TheWitcher witcher = (TheWitcher) ClassManager.WITCHER.getTheClass();
+		final TheWitcher witcher = (TheWitcher)ClassManager.WITCHER.getTheClass();
 		final int currentCombo = witcher.getComboHit(player);
 
 		/**
@@ -127,7 +125,7 @@ public class TheWitcher extends IClass implements Listener {
 		}
 
 		if (currentCombo > 2) {
-			damage += (currentCombo * 0.3);
+			damage += ((currentCombo - 2) * 0.3);
 			OldPlayerLib.playSound(player, Sound.ITEM_SHIELD_BREAK, 1.75f);
 		}
 

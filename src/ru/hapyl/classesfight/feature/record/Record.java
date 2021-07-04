@@ -26,9 +26,6 @@ public class Record {
 	private GameTask task;
 
 	public Record(Player player, boolean auto) {
-
-		// FIXME: 011. 06/11/2021 -
-
 		this.player = player;
 		this.uuid = player.getUniqueId();
 		this.steps = new HashMap<>();

@@ -98,8 +98,8 @@ public class HocusClass extends IClass implements Listener {
 
 	@Override
 	public void useUltimate(Player player) {
-		setHelmet(player, true);
 		this.setUsingUltimate(player, true, 400);
+		setHelmet(player, true);
 		Chat.broadcast("&cKiller Rabbit: &fI'm here for vengeance!");
 
 		final Rabbit rabbit = (Rabbit)Entities.RABBIT.spawn(player.getLocation(), me -> {

@@ -2,7 +2,10 @@ package ru.hapyl.classesfight.classes.iclass;
 
 import kz.hapyl.spigotutils.module.chat.Chat;
 import kz.hapyl.spigotutils.module.util.BukkitUtils;
-import org.bukkit.*;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -17,10 +20,10 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import ru.hapyl.classesfight.GameManager;
 import ru.hapyl.classesfight.ability.Abilities;
-import ru.hapyl.classesfight.classes.ClassManager;
-import ru.hapyl.classesfight.classes.EnumInfo;
 import ru.hapyl.classesfight.classes.ClassEquipment;
+import ru.hapyl.classesfight.classes.ClassManager;
 import ru.hapyl.classesfight.classes.ClassRating;
+import ru.hapyl.classesfight.classes.EnumInfo;
 import ru.hapyl.classesfight.event.PlayerDamageByPlayerEvent;
 import ru.hapyl.classesfight.feature.AbilitiesCooldown;
 import ru.hapyl.classesfight.feature.DamageFeature;
@@ -28,8 +31,9 @@ import ru.hapyl.classesfight.feature.EnumDamageCause;
 import ru.hapyl.classesfight.feature.Spectator;
 import ru.hapyl.classesfight.gameeffect.GameEffectManager;
 import ru.hapyl.classesfight.gameeffect.GameEffectType;
-import ru.hapyl.classesfight.gameeffect.Stun;
-import ru.hapyl.classesfight.utils.*;
+import ru.hapyl.classesfight.utils.CFItemBuilder;
+import ru.hapyl.classesfight.utils.GameUtils;
+import ru.hapyl.classesfight.utils.SoundLib;
 
 import java.util.Collection;
 
@@ -132,7 +136,7 @@ public class NinjaClass extends IClass implements Listener {
                             continue;
                         }
                         SoundLib.play(entity.getLocation(), Sound.ITEM_TRIDENT_HIT, 2);
-                        DamageFeature.damage((Player)entity, player, THROWING_STAR_DAMAGE, EnumDamageCause.PROJECTILE);
+                        DamageFeature.damage((Player)entity, player, THROWING_STAR_DAMAGE, EnumDamageCause.THROWING_STARS);
                         break main;
                     }
                 }

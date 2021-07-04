@@ -391,13 +391,14 @@ public class GameUtils {
 				.dot(player.getLocation().getDirection().normalize()) >= 0;
 	}
 
-	public static void createFakeExplosion
-			(Location loc, double radius, double damage, Player exclude, EnumDamageCause cause) {
+	public static void createFakeExplosion(Location loc, double radius, double damage, @Nullable Player exclude, EnumDamageCause cause) {
+		final Set<Player> players = GameUtils.getPlayerInRange(loc, radius);
 
-		final List<Player> players = GameManager.current().getNearbyPlayers(loc, radius, radius, radius, exclude);
-
-		for (Player arg0 : players) {
-			DamageFeature.damage(arg0, exclude, damage, cause);
+		for (Player player : players) {
+			if (exclude != null && exclude == player) {
+				continue;
+			}
+			DamageFeature.damage(player, exclude, damage, cause);
 		}
 
 		double g = radius - 2;

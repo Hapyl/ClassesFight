@@ -209,7 +209,7 @@ public class Hercules extends IClass implements Listener {
 						}
 						DamageFeature.damage(target, player, isUsingUltimate(player) ?
 								plungeDamage * 2 :
-								plungeDamage, EnumDamageCause.ENTITY_ATTACK);
+								plungeDamage, EnumDamageCause.PLUNGE);
 					});
 				}
 

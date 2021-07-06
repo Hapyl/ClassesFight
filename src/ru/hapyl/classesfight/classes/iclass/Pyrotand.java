@@ -1,3 +1,21 @@
+/*
+ * ClassesFight, a Minecraft plugin.
+ * Copyright (C) 2021 hapyl
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see https://www.gnu.org/licenses/.
+ */
+
 package ru.hapyl.classesfight.classes.iclass;
 
 import kz.hapyl.spigotutils.module.math.Geometry;
@@ -22,103 +40,103 @@ import java.util.Random;
 
 public class Pyrotand extends IClass {
 
-    public Pyrotand() {
-        super("Arch-vile", Material.FIRE_CHARGE);
-        this.setInfo("A pyrotechnic who had an accident... that he tried not to talk about. But with power of both &cFire &7and &9Water&7, makes himself a tough opponent.__" + Abilities.FIRE_BALL
-                        .getAbout() + Abilities.HOMING_WATER_BALL.getAbout(),
-                "Coin Flip",
-                "Flips a coin to decide which element to use to annihilate his enemies. &eHeads &7- applies burning to all players in radius. &eTails &7- applies drowning effect, slowing enemies.", 7);
-        this.setRole(ClassRole.STRATEGIST);
-        this.setRating(ClassRating.S);
-        this.setLvlRequired(2);
+	public Pyrotand() {
+		super("Arch-vile", Material.FIRE_CHARGE);
+		this.setInfo("A pyrotechnic who had an accident... that he tried not to talk about. But with power of both &cFire &7and &9Water&7, makes himself a tough opponent.__" + Abilities.FIRE_BALL
+						.getAbout() + Abilities.HOMING_WATER_BALL.getAbout(),
+				"Coin Flip",
+				"Flips a coin to decide which element to use to annihilate his enemies. &eHeads &7- applies burning to all players in radius. &eTails &7- applies drowning effect, slowing enemies.", 7);
+		this.setRole(ClassRole.STRATEGIST);
+		this.setRating(ClassRating.S);
+		this.setLvlRequired(2);
 
-        final ClassEquipment equipment = this.getClassEquipment(true);
+		final ClassEquipment equipment = this.getClassEquipment(true);
 
-        equipment.setHelmet("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjBlOTllZDY1MWU3YTUxZGQ3MmE0ZDRiYjUwNGEzZmQ3MzVkYTYxZjUxNjQzMjJkNmY0OTJkNzE2MjIxZDQyYyJ9fX0=");
-        equipment.setChestplate(133, 0, 0);
-        equipment.setLeggings(153, 0, 0);
-        equipment.setBoots(179, 0, 0);
+		equipment.setHelmet("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjBlOTllZDY1MWU3YTUxZGQ3MmE0ZDRiYjUwNGEzZmQ3MzVkYTYxZjUxNjQzMjJkNmY0OTJkNzE2MjIxZDQyYyJ9fX0=");
+		equipment.setChestplate(133, 0, 0);
+		equipment.setLeggings(153, 0, 0);
+		equipment.setBoots(179, 0, 0);
 
-        equipment.addItem(new CFItemBuilder(Material.IRON_SWORD).setName("&aKaa'h").setPureDamage(4.0d).applyDefaultSettings(false).build());
+		equipment.addItem(new CFItemBuilder(Material.IRON_SWORD).setName("&aKaa'h").setPureDamage(4.0d).applyDefaultSettings(false).build());
 
-        Abilities.FIRE_BALL.addItemIfExists(equipment);
-        Abilities.HOMING_WATER_BALL.addItemIfExists(equipment);
+		Abilities.FIRE_BALL.addItemIfExists(equipment);
+		Abilities.HOMING_WATER_BALL.addItemIfExists(equipment);
 
-    }
+	}
 
-    @Override
-    public void onStart(Player player) {
-    }
+	@Override
+	public void onStart(Player player) {
+	}
 
-    @Override
-    public void useUltimate(Player player) {
+	@Override
+	public void useUltimate(Player player) {
 
-        final boolean bool = new Random().nextBoolean();
-        final int windUpTime = 20;
+		final boolean bool = new Random().nextBoolean();
+		final int windUpTime = 20;
 
-        GameEffectManager.applyEffect(player, GameEffectType.RESISTANCE, windUpTime);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999, 5));
+		GameEffectManager.applyEffect(player, GameEffectType.RESISTANCE, windUpTime);
+		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999, 5));
 
-        new GameTask() {
+		new GameTask() {
 
-            private final Location location = player.getLocation();
-            private int tick = 0;
+			private final Location location = player.getLocation();
+			private int tick = 0;
 
-            @Override
-            public void run() {
+			@Override
+			public void run() {
 
-                if ((tick % 5) == 0) {
-                    Geometry.drawCircle(location, 7.5d, Quality.NORMAL, new Draw(Particle.LAVA) {
-                        @Override
-                        public void draw(Location location) {
-                            if (location.getWorld() == null) {
-                                return;
-                            }
-                            location.getWorld().spawnParticle((bool ? Particle.FLAME : Particle.WATER_SPLASH), location, 1, 0.1, 0.05, 0.1, 0.01);
-                        }
-                    });
-                }
+				if ((tick % 5) == 0) {
+					Geometry.drawCircle(location, 7.5d, Quality.NORMAL, new Draw(Particle.LAVA) {
+						@Override
+						public void draw(Location location) {
+							if (location.getWorld() == null) {
+								return;
+							}
+							location.getWorld().spawnParticle((bool ? Particle.FLAME : Particle.WATER_SPLASH), location, 1, 0.1, 0.05, 0.1, 0.01);
+						}
+					});
+				}
 
-                // affect
-                if (tick >= windUpTime) {
-                    player.removePotionEffect(PotionEffectType.SLOW);
+				// affect
+				if (tick >= windUpTime) {
+					player.removePotionEffect(PotionEffectType.SLOW);
 
-                    final World world = location.getWorld();
-                    if (world == null) {
-                        return;
-                    }
+					final World world = location.getWorld();
+					if (world == null) {
+						return;
+					}
 
-                    if (bool) {
-                        world.spawnParticle(Particle.LAVA, location, 30, 3.5, 0.1d, 3.5, 0.1);
-                        world.spawnParticle(Particle.FLAME, location, 30, 3.5, 0.1d, 3.5, 0.1);
-                        world.playSound(location, Sound.BLOCK_REDSTONE_TORCH_BURNOUT, 10, 0.85f);
-                    }
-                    else {
-                        world.spawnParticle(Particle.WATER_BUBBLE, location, 30, 3.5, 0.1d, 3.5, 0.1);
-                        world.spawnParticle(Particle.WATER_SPLASH, location, 30, 3.5, 0.1d, 3.5, 0.1);
-                        world.playSound(location, Sound.AMBIENT_UNDERWATER_ENTER, 10, 0.5f);
-                    }
+					if (bool) {
+						world.spawnParticle(Particle.LAVA, location, 30, 3.5, 0.1d, 3.5, 0.1);
+						world.spawnParticle(Particle.FLAME, location, 30, 3.5, 0.1d, 3.5, 0.1);
+						world.playSound(location, Sound.BLOCK_REDSTONE_TORCH_BURNOUT, 10, 0.85f);
+					}
+					else {
+						world.spawnParticle(Particle.WATER_BUBBLE, location, 30, 3.5, 0.1d, 3.5, 0.1);
+						world.spawnParticle(Particle.WATER_SPLASH, location, 30, 3.5, 0.1d, 3.5, 0.1);
+						world.playSound(location, Sound.AMBIENT_UNDERWATER_ENTER, 10, 0.5f);
+					}
 
-                    player.getNearbyEntities(7.5d, 7.5d, 7.5d)
-                            .stream()
-                            .filter(entity -> entity instanceof Player).forEach(ent -> {
-                        Player tar = (Player)ent;
-                        if (Spectator.isSpectator(tar) || tar == player) {
-                            return;
-                        }
-                        DamageFeature.damage(tar, player, 8.5d, EnumDamageCause.ENTITY_ATTACK);
-                        GameEffectManager.applyEffect(tar, bool ? GameEffectType.BURNING : GameEffectType.DROWNING, 120);
-                    });
+					player.getNearbyEntities(7.5d, 7.5d, 7.5d)
+							.stream()
+							.filter(entity -> entity instanceof Player).forEach(ent -> {
+						Player tar = (Player)ent;
+						if (Spectator.isSpectator(tar) || tar == player) {
+							return;
+						}
+						DamageFeature.damage(tar, player, 8.5d, EnumDamageCause.ENTITY_ATTACK);
+						GameEffectManager.applyEffect(tar, bool ? GameEffectType.BURNING : GameEffectType.DROWNING, 120);
+					});
 
-                    this.cancel();
-                    return;
-                }
+					this.cancel();
+					return;
+				}
 
-                ++tick;
+				++tick;
 
-            }
-        }.runTaskTimer(0, 1);
+			}
+		}.runTaskTimer(0, 1);
 
-    }
+	}
 
 }

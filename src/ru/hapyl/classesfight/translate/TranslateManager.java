@@ -1,26 +1,44 @@
+/*
+ * ClassesFight, a Minecraft plugin.
+ * Copyright (C) 2021 hapyl
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see https://www.gnu.org/licenses/.
+ */
+
 package ru.hapyl.classesfight.translate;
 
 public class TranslateManager {
 
-    public static TranslateManager current;
+	public static TranslateManager current;
 
-    public static final Locale ENGLISH = new Locale("english", "English");
-    public static final Locale RUSSIAN = new Locale("russian", "Russian");
+	public static final Locale ENGLISH = new Locale("english", "English");
+	public static final Locale RUSSIAN = new Locale("russian", "Russian");
 
-    public TranslateManager() {
-        if (current != null) {
-            throw new IllegalStateException("Cannot create TranslateManager since it's already created!");
-        }
-        current = this;
-    }
+	public TranslateManager() {
+		if (current != null) {
+			throw new IllegalStateException("Cannot create TranslateManager since it's already created!");
+		}
+		current = this;
+	}
 
-    public static TranslateManager current() {
-        return current;
-    }
+	public static TranslateManager current() {
+		return current;
+	}
 
-    public Locale getLocale(Locale locale) {
-        return locale;
-    }
+	public Locale getLocale(Locale locale) {
+		return locale;
+	}
 
 
 }

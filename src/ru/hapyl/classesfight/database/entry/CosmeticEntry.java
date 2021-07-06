@@ -1,3 +1,21 @@
+/*
+ * ClassesFight, a Minecraft plugin.
+ * Copyright (C) 2021 hapyl
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see https://www.gnu.org/licenses/.
+ */
+
 package ru.hapyl.classesfight.database.entry;
 
 import org.bukkit.craftbukkit.libs.jline.internal.Nullable;
@@ -10,82 +28,82 @@ import java.util.List;
 
 public class CosmeticEntry extends DatabaseEntry {
 
-    public CosmeticEntry(Database database) {
-        super(database);
-    }
+	public CosmeticEntry(Database database) {
+		super(database);
+	}
 
-    public boolean hasCosmetic(EnumEffect effect) {
-        return getOwnedCosmetics().contains(effect);
-    }
+	public boolean hasCosmetic(EnumEffect effect) {
+		return getOwnedCosmetics().contains(effect);
+	}
 
-    public List<EnumEffect> getOwnedCosmetics() {
-        final List<String> hash = this.database.getYaml().getStringList("cosmetics");
-        final List<EnumEffect> enums = new ArrayList<>();
-        for (String str : hash) {
-            final EnumEffect enumValue = Validator.getEnumValue(EnumEffect.class, jsonToEnum(str));
-            if (enumValue != null) {
-                enums.add(enumValue);
-            }
-        }
-        return enums;
-    }
+	public List<EnumEffect> getOwnedCosmetics() {
+		final List<String> hash = this.database.getYaml().getStringList("cosmetics");
+		final List<EnumEffect> enums = new ArrayList<>();
+		for (String str : hash) {
+			final EnumEffect enumValue = Validator.getEnumValue(EnumEffect.class, jsonToEnum(str));
+			if (enumValue != null) {
+				enums.add(enumValue);
+			}
+		}
+		return enums;
+	}
 
-    public List<EnumEffect> getOwnedCosmetics(EnumEffect.Type type) {
-        final List<EnumEffect> hash = new ArrayList<>();
-        for (EnumEffect ownedCosmetic : this.getOwnedCosmetics()) {
-            if (ownedCosmetic.getType() == type) {
-                hash.add(ownedCosmetic);
-            }
-        }
-        return hash;
-    }
+	public List<EnumEffect> getOwnedCosmetics(EnumEffect.Type type) {
+		final List<EnumEffect> hash = new ArrayList<>();
+		for (EnumEffect ownedCosmetic : this.getOwnedCosmetics()) {
+			if (ownedCosmetic.getType() == type) {
+				hash.add(ownedCosmetic);
+			}
+		}
+		return hash;
+	}
 
-    private void setCosmetic(List<EnumEffect> effects) {
-        List<String> stringList = new ArrayList<>();
-        for (EnumEffect effect : effects) {
-            stringList.add(enumToJson(effect));
-        }
-        this.database.getYaml().set("cosmetics", stringList);
-    }
+	private void setCosmetic(List<EnumEffect> effects) {
+		List<String> stringList = new ArrayList<>();
+		for (EnumEffect effect : effects) {
+			stringList.add(enumToJson(effect));
+		}
+		this.database.getYaml().set("cosmetics", stringList);
+	}
 
-    public void revokeCosmetic(EnumEffect effect) {
-        final List<EnumEffect> hash = getOwnedCosmetics();
-        hash.remove(effect);
-        setCosmetic(hash);
-    }
+	public void revokeCosmetic(EnumEffect effect) {
+		final List<EnumEffect> hash = getOwnedCosmetics();
+		hash.remove(effect);
+		setCosmetic(hash);
+	}
 
-    public void grantCosmetic(EnumEffect effect) {
-        final List<EnumEffect> hash = getOwnedCosmetics();
-        if (hash.contains(effect)) {
-            return;
-        }
-        hash.add(effect);
-        setCosmetic(hash);
-    }
+	public void grantCosmetic(EnumEffect effect) {
+		final List<EnumEffect> hash = getOwnedCosmetics();
+		if (hash.contains(effect)) {
+			return;
+		}
+		hash.add(effect);
+		setCosmetic(hash);
+	}
 
-    @Nullable
-    public EnumEffect getCurrentEffect(EnumEffect.Type type) {
-        final String string = this.database.getYaml().getString("cosmetic." + type.name() + ".selected");
-        if (string != null) {
-            return Validator.getEnumValue(EnumEffect.class, jsonToEnum(string));
-        }
-        return null;
-    }
+	@Nullable
+	public EnumEffect getCurrentEffect(EnumEffect.Type type) {
+		final String string = this.database.getYaml().getString("cosmetic." + type.name() + ".selected");
+		if (string != null) {
+			return Validator.getEnumValue(EnumEffect.class, jsonToEnum(string));
+		}
+		return null;
+	}
 
-    public void resetCurrentEffect(EnumEffect.Type type) {
-        this.database.getYaml().set("cosmetic." + type.name() + ".selected", null);
-    }
+	public void resetCurrentEffect(EnumEffect.Type type) {
+		this.database.getYaml().set("cosmetic." + type.name() + ".selected", null);
+	}
 
-    public void setCurrentEffect(EnumEffect effect) {
-        this.database.getYaml().set("cosmetic." + effect.getType().name() + ".selected", enumToJson(effect));
-    }
+	public void setCurrentEffect(EnumEffect effect) {
+		this.database.getYaml().set("cosmetic." + effect.getType().name() + ".selected", enumToJson(effect));
+	}
 
-    public boolean isEnabled(EnumEffect.Type type) {
-        return this.database.getYaml().getBoolean("cosmetic." + type.name() + ".enabled", true);
-    }
+	public boolean isEnabled(EnumEffect.Type type) {
+		return this.database.getYaml().getBoolean("cosmetic." + type.name() + ".enabled", true);
+	}
 
-    public void setEnabled(EnumEffect.Type type, boolean value) {
-        this.database.getYaml().set("cosmetic." + type.name() + ".enabled", value);
-    }
+	public void setEnabled(EnumEffect.Type type, boolean value) {
+		this.database.getYaml().set("cosmetic." + type.name() + ".enabled", value);
+	}
 
 }

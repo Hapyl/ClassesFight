@@ -1,3 +1,21 @@
+/*
+ * ClassesFight, a Minecraft plugin.
+ * Copyright (C) 2021 hapyl
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see https://www.gnu.org/licenses/.
+ */
+
 package ru.hapyl.classesfight.commands;
 
 import kz.hapyl.spigotutils.module.chat.Chat;
@@ -14,37 +32,37 @@ import java.util.List;
 
 public class PlayEffectCommand implements CommandExecutor, TabCompleter {
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player)sender;
-            if (cmd.getName().equalsIgnoreCase("play")) {
-                if (args.length >= 1) {
-                    EnumEffect effect = Validator.getEnumValue(EnumEffect.class, args[0]);
-                    if (effect == null) {
-                        Chat.sendMessage(player, "&cInvalid effect.");
-                        return true;
-                    }
-                    effect.display(player);
-                    Chat.sendMessage(player, "&aPlaying %s effect for you.", Chat.capitalize(effect));
-                }
-            }
-        }
-        else {
-            sender.sendMessage("You must be a player to use this.");
-        }
-        return true;
-    }
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if (sender instanceof Player) {
+			Player player = (Player)sender;
+			if (cmd.getName().equalsIgnoreCase("play")) {
+				if (args.length >= 1) {
+					EnumEffect effect = Validator.getEnumValue(EnumEffect.class, args[0]);
+					if (effect == null) {
+						Chat.sendMessage(player, "&cInvalid effect.");
+						return true;
+					}
+					effect.display(player);
+					Chat.sendMessage(player, "&aPlaying %s effect for you.", Chat.capitalize(effect));
+				}
+			}
+		}
+		else {
+			sender.sendMessage("You must be a player to use this.");
+		}
+		return true;
+	}
 
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("play")) {
-            if (args.length == 1) {
-                final List<String> all = new ArrayList<>(Chat.arrayToList(EnumEffect.values()));
-                return Chat.tabCompleterSort(all, args);
-            }
-        }
-        return null;
-    }
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+		if (cmd.getName().equalsIgnoreCase("play")) {
+			if (args.length == 1) {
+				final List<String> all = new ArrayList<>(Chat.arrayToList(EnumEffect.values()));
+				return Chat.tabCompleterSort(all, args);
+			}
+		}
+		return null;
+	}
 
 }

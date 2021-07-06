@@ -1,26 +1,44 @@
+/*
+ * ClassesFight, a Minecraft plugin.
+ * Copyright (C) 2021 hapyl
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see https://www.gnu.org/licenses/.
+ */
+
 package ru.hapyl.classesfight.skin;
 
 import ru.hapyl.classesfight.classes.ClassManager;
 
 public enum SkinContainer {
 
-    DRAGON("Ender Dragon", ClassManager.ENDER, WrappedSkin.emptySkin());
+	DRAGON("Ender Dragon", ClassManager.ENDER, WrappedSkin.emptySkin());
 
-    private final String skinName;
-    private final ClassManager forClass;
-    private final WrappedSkin wrappedSkin;
+	private final String skinName;
+	private final ClassManager forClass;
+	private final WrappedSkin wrappedSkin;
 
-    SkinContainer() {
-        this("Invalid or Incomplete Skin", ClassManager.ENDER, WrappedSkin.emptySkin());
-    }
+	SkinContainer() {
+		this("Invalid or Incomplete Skin", ClassManager.ENDER, WrappedSkin.emptySkin());
+	}
 
-    SkinContainer(String name, ClassManager forClass, WrappedSkin wrappedSkin) {
-        this.skinName = name;
-        this.forClass = forClass;
-        this.wrappedSkin = wrappedSkin;
-    }
+	SkinContainer(String name, ClassManager forClass, WrappedSkin wrappedSkin) {
+		this.skinName = name;
+		this.forClass = forClass;
+		this.wrappedSkin = wrappedSkin;
+	}
 
-    public WrappedSkin getWrappedSkin() {
-        return wrappedSkin;
-    }
+	public WrappedSkin getWrappedSkin() {
+		return wrappedSkin;
+	}
 }

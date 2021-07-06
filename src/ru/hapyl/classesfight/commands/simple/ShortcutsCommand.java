@@ -1,3 +1,21 @@
+/*
+ * ClassesFight, a Minecraft plugin.
+ * Copyright (C) 2021 hapyl
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see https://www.gnu.org/licenses/.
+ */
+
 package ru.hapyl.classesfight.commands.simple;
 
 import kz.hapyl.spigotutils.module.chat.Chat;
@@ -19,42 +37,42 @@ import java.util.function.Consumer;
 
 public class ShortcutsCommand {
 
-    private final CommandProcessor commandProcessor;
+	private final CommandProcessor commandProcessor;
 
-    public ShortcutsCommand() {
+	public ShortcutsCommand() {
 
-        this.commandProcessor = new CommandProcessor();
-        register("collection", CollectionGUI::new);
-        register("shop", ShopGUI::new);
-        register("lvl", ExpGUI::new);
-        register("minigames", MinigameMenu::new);
-        register("settings", SettingsMenu::new);
-        register("map", MapSelectMenu::new);
-        register("menu", GameMenuGUI::new);
-        register("stats", InfoMenu::new);
-        register("archive", this::notYet);
-    }
+		this.commandProcessor = new CommandProcessor();
+		register("collection", CollectionGUI::new);
+		register("shop", ShopGUI::new);
+		register("lvl", ExpGUI::new);
+		register("minigames", MinigameMenu::new);
+		register("settings", SettingsMenu::new);
+		register("map", MapSelectMenu::new);
+		register("menu", GameMenuGUI::new);
+		register("stats", InfoMenu::new);
+		register("archive", this::notYet);
+	}
 
-    private void notYet(Player player) {
-        Chat.sendMessage(player, "&cThis feature is not yet available!");
-    }
+	private void notYet(Player player) {
+		Chat.sendMessage(player, "&cThis feature is not yet available!");
+	}
 
-    private void register(String cmd, Consumer<Player> consumer) {
+	private void register(String cmd, Consumer<Player> consumer) {
 
-        final SimpleCommand command = new SimpleCommand(cmd) {
-            @Override
-            protected void execute(CommandSender commandSender, String[] strings) {
-                if (GameManager.current().isGameInProgress()) {
-                    Chat.sendMessage(commandSender, "&cYou can only use this command in lobby!");
-                    return;
-                }
-                consumer.accept((Player)commandSender);
-            }
-        };
+		final SimpleCommand command = new SimpleCommand(cmd) {
+			@Override
+			protected void execute(CommandSender commandSender, String[] strings) {
+				if (GameManager.current().isGameInProgress()) {
+					Chat.sendMessage(commandSender, "&cYou can only use this command in lobby!");
+					return;
+				}
+				consumer.accept((Player)commandSender);
+			}
+		};
 
-        command.setAllowOnlyPlayer(true);
-        this.commandProcessor.registerCommands(command);
+		command.setAllowOnlyPlayer(true);
+		this.commandProcessor.registerCommands(command);
 
-    }
+	}
 
 }

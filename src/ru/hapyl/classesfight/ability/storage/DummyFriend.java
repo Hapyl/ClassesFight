@@ -1,3 +1,21 @@
+/*
+ * ClassesFight, a Minecraft plugin.
+ * Copyright (C) 2021 hapyl
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see https://www.gnu.org/licenses/.
+ */
+
 package ru.hapyl.classesfight.ability.storage;
 
 import kz.hapyl.spigotutils.module.locaiton.LocationHelper;
@@ -16,68 +34,68 @@ import java.util.Map;
 
 public abstract class DummyFriend extends Ability {
 
-    private static final Map<Player, HumanNPC> friends = new HashMap<>();
+	private static final Map<Player, HumanNPC> friends = new HashMap<>();
 
-    private final int lifeTime;
-    private final boolean left;
+	private final int lifeTime;
+	private final boolean left;
 
-    public DummyFriend(String name, String info, boolean left) {
-        super("Summon " + name, info);
-        this.setItem(Material.LEATHER);
-        this.lifeTime = 200;
-        this.left = left;
-        this.setCooldown(this.lifeTime * 2);
-        this.setCastMessage("Come to life!", "Appear!");
-    }
+	public DummyFriend(String name, String info, boolean left) {
+		super("Summon " + name, info);
+		this.setItem(Material.LEATHER);
+		this.lifeTime = 200;
+		this.left = left;
+		this.setCooldown(this.lifeTime * 2);
+		this.setCastMessage("Come to life!", "Appear!");
+	}
 
-    public abstract void affectTick(Player player, HumanNPC friend);
+	public abstract void affectTick(Player player, HumanNPC friend);
 
-    private void disappear(Player player, HumanNPC friend) {
-        friends.remove(player);
-        friend.remove();
-    }
+	private void disappear(Player player, HumanNPC friend) {
+		friends.remove(player);
+		friend.remove();
+	}
 
-    @Override
-    public void onStop() {
-        friends.clear();
-    }
+	@Override
+	public void onStop() {
+		friends.clear();
+	}
 
-    @Override
-    public Response useAbility(Player player) {
+	@Override
+	public Response useAbility(Player player) {
 
-        if (hasFriend(player)) {
-            return Response.error("Cannot use it at the moment!");
-        }
+		if (hasFriend(player)) {
+			return Response.error("Cannot use it at the moment!");
+		}
 
-        final HumanNPC npc = new HumanNPC(getLocation(player), "", player.getName());
-        npc.showAll();
-        npc.setFarAwayDist(100);
-        friends.put(player, npc);
+		final HumanNPC npc = new HumanNPC(getLocation(player), "", player.getName());
+		npc.showAll();
+		npc.setFarAwayDist(100);
+		friends.put(player, npc);
 
-        GameTask.runTaskTimerTimes((task, time) -> {
-            npc.setLocation(getLocation(player));
-            npc.setPose(player.isSneaking() ? NPCPose.CROUCHING : NPCPose.STANDING);
+		GameTask.runTaskTimerTimes((task, time) -> {
+			npc.setLocation(getLocation(player));
+			npc.setPose(player.isSneaking() ? NPCPose.CROUCHING : NPCPose.STANDING);
 
-            if (time % 20 == 0) {
-                affectTick(player, npc);
-            }
+			if (time % 20 == 0) {
+				affectTick(player, npc);
+			}
 
-            if (time == 0) {
-                disappear(player, npc);
-            }
+			if (time == 0) {
+				disappear(player, npc);
+			}
 
-        }, 1, lifeTime).addCancelEvent(() -> this.disappear(player, npc));
+		}, 1, lifeTime).addCancelEvent(() -> this.disappear(player, npc));
 
-        return Response.OK;
-    }
+		return Response.OK;
+	}
 
-    private Location getLocation(Player player) {
-        final Vector location = this.left ? LocationHelper.getToTheLeft(player.getLocation(), 1.5d) : LocationHelper.getToTheRight(player.getLocation(), 1.5d);
-        return player.getLocation().add(location);
-    }
+	private Location getLocation(Player player) {
+		final Vector location = this.left ? LocationHelper.getToTheLeft(player.getLocation(), 1.5d) : LocationHelper.getToTheRight(player.getLocation(), 1.5d);
+		return player.getLocation().add(location);
+	}
 
-    public boolean hasFriend(Player player) {
-        return friends.containsKey(player);
-    }
+	public boolean hasFriend(Player player) {
+		return friends.containsKey(player);
+	}
 
 }

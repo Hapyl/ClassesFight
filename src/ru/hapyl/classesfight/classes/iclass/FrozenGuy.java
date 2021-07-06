@@ -1,3 +1,21 @@
+/*
+ * ClassesFight, a Minecraft plugin.
+ * Copyright (C) 2021 hapyl
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see https://www.gnu.org/licenses/.
+ */
+
 package ru.hapyl.classesfight.classes.iclass;
 
 import kz.hapyl.spigotutils.module.chat.Chat;
@@ -21,15 +39,18 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.util.Vector;
 import ru.hapyl.classesfight.GameManager;
-import ru.hapyl.classesfight.classes.ClassManager;
-import ru.hapyl.classesfight.classes.EnumInfo;
 import ru.hapyl.classesfight.classes.ClassEquipment;
+import ru.hapyl.classesfight.classes.ClassManager;
 import ru.hapyl.classesfight.classes.ClassRating;
+import ru.hapyl.classesfight.classes.EnumInfo;
 import ru.hapyl.classesfight.feature.DamageFeature;
 import ru.hapyl.classesfight.feature.EnumDamageCause;
 import ru.hapyl.classesfight.feature.Spectator;
 import ru.hapyl.classesfight.runnable.GameTask;
-import ru.hapyl.classesfight.utils.*;
+import ru.hapyl.classesfight.utils.CFItemBuilder;
+import ru.hapyl.classesfight.utils.GameUtils;
+import ru.hapyl.classesfight.utils.GeometryLib;
+import ru.hapyl.classesfight.utils.SoundLib;
 
 import java.util.*;
 
@@ -86,7 +107,7 @@ public class FrozenGuy extends IClass implements Listener {
         Location location = player.getLocation().add(0, 1.5, 0);
         shoot(player, location, MAX_DISTANCE, SHIFT);
 
-//        AbilitiesCooldown.add(player, "Reloading", GUN_CD_KEY, GUN_RELOAD_TIME);
+        //        AbilitiesCooldown.add(player, "Reloading", GUN_CD_KEY, GUN_RELOAD_TIME);
 
     }
 
@@ -161,7 +182,7 @@ public class FrozenGuy extends IClass implements Listener {
                 player.setCooldown(Material.SNOWBALL, LAVINA_COOLDOWN);
                 player.getInventory().addItem(LAVINA_ITEM);
 
-//                AbilitiesCooldown.add(player, "Ice Cone", "ice_cone", 400, LAVINA_ITEM);
+                //                AbilitiesCooldown.add(player, "Ice Cone", "ice_cone", 400, LAVINA_ITEM);
                 snowball.addScoreboardTag("cone_snowball");
                 snowball.setCustomName(player.getUniqueId().toString());
 

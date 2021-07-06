@@ -13,7 +13,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, see <https://www.gnu.org/licenses/>.
+ * along with this program; if not, see https://www.gnu.org/licenses/.
  */
 
 package ru.hapyl.classesfight;
@@ -23,8 +23,8 @@ import org.bukkit.plugin.Plugin;
 
 public class Main {
 
-    public static Plugin getMain() {
-        return ClassesFight.getPlugin();
-    }
+	public static Plugin getMain() {
+		return ClassesFight.getPlugin();
+	}
 
 }

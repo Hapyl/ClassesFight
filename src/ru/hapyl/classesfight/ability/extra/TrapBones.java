@@ -1,3 +1,21 @@
+/*
+ * ClassesFight, a Minecraft plugin.
+ * Copyright (C) 2021 hapyl
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see https://www.gnu.org/licenses/.
+ */
+
 package ru.hapyl.classesfight.ability.extra;
 
 import kz.hapyl.spigotutils.module.util.ThreadRandom;
@@ -16,61 +34,61 @@ import java.util.Set;
 
 public class TrapBones {
 
-    private final Player player;
-    private final Location location;
-    private final Set<GarbageEntity<ArmorStand>> stands;
+	private final Player player;
+	private final Location location;
+	private final Set<GarbageEntity<ArmorStand>> stands;
 
-    public TrapBones(Player player, Location location) {
-        this.player = player;
-        this.location = location;
-        this.location.setYaw((float)(ThreadRandom.nextFloat() * (Math.PI * 2f)));
-        this.stands = new HashSet<>();
-        this.spawnStands();
-    }
+	public TrapBones(Player player, Location location) {
+		this.player = player;
+		this.location = location;
+		this.location.setYaw((float)(ThreadRandom.nextFloat() * (Math.PI * 2f)));
+		this.stands = new HashSet<>();
+		this.spawnStands();
+	}
 
-    private final float[][] offsets = {
-            {-0.057819f, -0.77205f, -0.024552f},
-            {0.048929f, -0.68791f, -0.080905f},
-            {-0.01652f, -0.76746f, 0.03125f},
-            {0.0514712f, -0.79218f, -0.4375f}
-    };
+	private final float[][] offsets = {
+			{-0.057819f, -0.77205f, -0.024552f},
+			{0.048929f, -0.68791f, -0.080905f},
+			{-0.01652f, -0.76746f, 0.03125f},
+			{0.0514712f, -0.79218f, -0.4375f}
+	};
 
-    private final float[][] headPositions = {
-            {10f, 40f, 5f},
-            {25f, 165f, -10f},
-            {0f, -10f, 15f},
-            {0f, 10f, 65f}
-    };
+	private final float[][] headPositions = {
+			{10f, 40f, 5f},
+			{25f, 165f, -10f},
+			{0f, -10f, 15f},
+			{0f, 10f, 65f}
+	};
 
-    private void spawnStands() {
-        for (int i = 0; i < offsets.length; i++) {
-            final GarbageEntity<ArmorStand> entity = new GarbageEntity<>(ArmorStand.class);
-            this.stands.add(entity);
-            int finalI = i;
-            entity.spawn(location.clone().add(offsets[i][0], offsets[i][1], offsets[i][2]), me -> {
-                me.setVisible(false);
-                me.setMarker(true);
-                me.setSilent(true);
-                me.getEquipment().setHelmet(new ItemStack(Material.BONE));
-                me.setHeadPose(new EulerAngle(Math.toRadians(headPositions[finalI][0]), Math.toRadians(headPositions[finalI][1]), Math.toRadians(headPositions[finalI][2])));
-            });
-        }
-    }
+	private void spawnStands() {
+		for (int i = 0; i < offsets.length; i++) {
+			final GarbageEntity<ArmorStand> entity = new GarbageEntity<>(ArmorStand.class);
+			this.stands.add(entity);
+			int finalI = i;
+			entity.spawn(location.clone().add(offsets[i][0], offsets[i][1], offsets[i][2]), me -> {
+				me.setVisible(false);
+				me.setMarker(true);
+				me.setSilent(true);
+				me.getEquipment().setHelmet(new ItemStack(Material.BONE));
+				me.setHeadPose(new EulerAngle(Math.toRadians(headPositions[finalI][0]), Math.toRadians(headPositions[finalI][1]), Math.toRadians(headPositions[finalI][2])));
+			});
+		}
+	}
 
-    public Player getPlayer() {
-        return player;
-    }
+	public Player getPlayer() {
+		return player;
+	}
 
-    public Location getLocation() {
-        return location;
-    }
+	public Location getLocation() {
+		return location;
+	}
 
-    public void addBoneCharge() {
-        ((TakerClass)ClassManager.TAKER.getTheClass()).addBoneCharge(this.player);
-    }
+	public void addBoneCharge() {
+		((TakerClass)ClassManager.TAKER.getTheClass()).addBoneCharge(this.player);
+	}
 
-    public void remove() {
-        this.stands.forEach(GarbageEntity::kill);
-        this.stands.clear();
-    }
+	public void remove() {
+		this.stands.forEach(GarbageEntity::kill);
+		this.stands.clear();
+	}
 }

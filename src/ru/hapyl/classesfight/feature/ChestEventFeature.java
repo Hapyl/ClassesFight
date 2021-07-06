@@ -1,3 +1,21 @@
+/*
+ * ClassesFight, a Minecraft plugin.
+ * Copyright (C) 2021 hapyl
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see https://www.gnu.org/licenses/.
+ */
+
 package ru.hapyl.classesfight.feature;
 
 import kz.hapyl.spigotutils.module.inventory.ItemBuilder;
@@ -19,7 +37,7 @@ import ru.hapyl.classesfight.classes.ClassManager;
 import ru.hapyl.classesfight.utils.ParticlesBuilder;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Random;
 
 public class ChestEventFeature implements Listener {
 
@@ -210,7 +228,7 @@ public class ChestEventFeature implements Listener {
 
         if (GameManager.current().isEventPlayed()) return false;
 
-//        if (GameScoreboard.getTime()[0] <= 0 && GameScoreboard.getTime()[1] < 30) return false;
+        //        if (GameScoreboard.getTime()[0] <= 0 && GameScoreboard.getTime()[1] < 30) return false;
 
         double random = new Random().nextDouble() * 101;
         if (chance >= random) {

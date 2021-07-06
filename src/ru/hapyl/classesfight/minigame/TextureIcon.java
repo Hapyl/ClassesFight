@@ -18,18 +18,20 @@
 
 package ru.hapyl.classesfight.minigame;
 
-import kz.hapyl.spigotutils.module.inventory.Icon;
 import kz.hapyl.spigotutils.module.inventory.ItemBuilder;
-import org.bukkit.Material;
+import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
-public class TextureIcon extends Icon {
+public class TextureIcon {
 
+	private final String name;
+	private final String lore;
 	private final String texture;
 	private final boolean smart;
 
 	public TextureIcon(String texture, String name, String lore, boolean smart) {
-		super(Material.PLAYER_HEAD, name, lore);
+		this.name = name;
+		this.lore = lore;
 		this.texture = texture;
 		this.smart = smart;
 	}
@@ -42,19 +44,17 @@ public class TextureIcon extends Icon {
 		return this.texture;
 	}
 
-	@Override
 	public ItemStack buildIcon() {
 		return this.getBuilder().toItemStack();
 	}
 
-	@Override
 	public ItemBuilder getBuilder() {
-		final ItemBuilder builder = super.getBuilder().setHeadTexture(this.getTexture()).removeLore().addLore();
+		final ItemBuilder builder = ItemBuilder.playerHead(this.getTexture()).setName(ChatColor.GREEN + this.name).removeLore().addLore();
 		if (this.smart) {
-			return builder.addSmartLore(this.getLore());
+			return builder.addSmartLore(this.lore);
 		}
 		else {
-			return builder.addLore(this.getLore());
+			return builder.addLore(this.lore);
 		}
 	}
 }

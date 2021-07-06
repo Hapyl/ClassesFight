@@ -50,7 +50,6 @@ public class MinigameMenu extends PlayerGUI {
 
     private void updateMenu() {
         final ItemStack blackBar = new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setName("&0").toItemStack();
-        this.setArrowBack("Main Menu", GameMenuGUI::new);
         this.fillItem(0, 8, blackBar);
         this.fillItem(this.getSize() - 9, this.getSize() - 1, blackBar);
 
@@ -58,6 +57,7 @@ public class MinigameMenu extends PlayerGUI {
             createIcon(slot, Minigame.values()[i]);
         }
 
+        this.setArrowBack("Main Menu", GameMenuGUI::new);
         this.openInventory();
     }
 

@@ -142,14 +142,6 @@ public class DamageFeature {
 		player.setMaximumNoDamageTicks(20);
 	}
 
-	public static void updateCombatTime(Player player) {
-		combatTag.put(player, System.currentTimeMillis());
-	}
-
-	public static long getCombatTime(Player player) {
-		return COMBAT_TAG - (System.currentTimeMillis() - combatTag.getOrDefault(player, 0L));
-	}
-
 	@Super
 	public static void damage(Player player, @Nullable Player damager, double damage, EnumDamageCause cause, boolean calculateKnockback) {
 		if (Spectator.isSpectator(player) || player.isInvulnerable()) {
@@ -181,15 +173,6 @@ public class DamageFeature {
 
 	}
 
-	@Nullable
-	public static Player getLastDamager(Player player) {
-		return lastDamager.getOrDefault(player, null);
-	}
-
-	public static EnumDamageCause getLastDamageCause(Player player) {
-		return lastDamageCause.getOrDefault(player, EnumDamageCause.NONE);
-	}
-
 	public static void damage(Player player, double damage, EnumDamageCause cause) {
 		damage(player, player, damage, cause);
 	}
@@ -202,16 +185,29 @@ public class DamageFeature {
 		final EnumInfo attack = playerClass.getTheClass().getAttack();
 		final EnumInfo defense = damagerClass.getTheClass().getDefense();
 
-		return calculateDamage(attack, initDamage, defense);
+		return calculateDamage(initDamage, attack, defense);
 
 	}
 
 	public static double calculateDamage(double damage, EnumInfo strength, EnumInfo defense) {
-		return (damage / 2) * strength.getValue() / (defense.getValue() / 2);
+		return (damage / 2) * (strength.getValue()) / (defense.getValue());
 	}
 
-	public static double calculateDamage(EnumInfo attack, double initDamage, EnumInfo defense) {
-		return (initDamage / 2) * attack.getValue() / (defense.getValue());
+	public static void updateCombatTime(Player player) {
+		combatTag.put(player, System.currentTimeMillis());
+	}
+
+	public static long getCombatTime(Player player) {
+		return COMBAT_TAG - (System.currentTimeMillis() - combatTag.getOrDefault(player, 0L));
+	}
+
+	@Nullable
+	public static Player getLastDamager(Player player) {
+		return lastDamager.getOrDefault(player, null);
+	}
+
+	public static EnumDamageCause getLastDamageCause(Player player) {
+		return lastDamageCause.getOrDefault(player, EnumDamageCause.NONE);
 	}
 
 	public static void fakeDeath(Player player) {

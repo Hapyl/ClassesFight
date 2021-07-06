@@ -50,9 +50,9 @@ public abstract class IClass {
 
 	private ItemStack item;
 	private EnumInfo health;
-	private EnumInfo attack;
-	private EnumInfo defense;
-	private EnumInfo magic;
+	@Deprecated private EnumInfo attack;
+	@Deprecated private EnumInfo defense;
+	@Deprecated private EnumInfo magic;
 	private ClassInfo info;
 	private ClassUltimate ultimate;
 	private ClassRole role;
@@ -61,7 +61,6 @@ public abstract class IClass {
 
 	private ClassDifficulty difficulty = ClassDifficulty.NONE;
 	private int lvlRequired = 0;
-
 
 	/**
 	 * Создает объект класса.
@@ -76,8 +75,7 @@ public abstract class IClass {
 	 * @param ultimate  - Информация о ульте.
 	 */
 
-	public IClass(String className, Material mat, EnumInfo health, EnumInfo attack, EnumInfo defense, EnumInfo magic, ClassRole role, ClassInfo info
-			, ClassUltimate ultimate) {
+	public IClass(String className, Material mat, EnumInfo health, EnumInfo attack, EnumInfo defense, EnumInfo magic, ClassRole role, ClassInfo info, ClassUltimate ultimate) {
 		this(className, new ItemStack(mat), health, attack, defense, magic, role, info, ultimate);
 	}
 
@@ -125,7 +123,7 @@ public abstract class IClass {
 	}
 
 	public ClassEquipment getClassEquipment() {
-		return classEquipment;
+		return classEquipment.equipAtStart();
 	}
 
 	public ClassEquipment getClassEquipment(boolean autoEquip) {

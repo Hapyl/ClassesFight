@@ -44,6 +44,7 @@ import ru.hapyl.classesfight.feature.Spectator;
 import ru.hapyl.classesfight.runnable.GameTask;
 import ru.hapyl.classesfight.utils.CFItemBuilder;
 import ru.hapyl.classesfight.utils.GameUtils;
+import ru.hapyl.classesfight.utils.Icons;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,7 +70,12 @@ public class Librarian extends IClass implements Listener {
 		super("Librarian of Void", Material.BOOK);
 
 		this.data = new HashMap<>();
-		this.setInfo("A librarian", "Void of Blindness", "Create massive void of blindness field. Everyone who dares steps inside, will be affected by paranoia and glow. Librarian also gets a damage and speed boost.", 8);
+		this.setInfo("Mislead by the Void, the sacrifices were made.",
+				Icons.abilityDot("Grimore", "An ancient book that contains the darkest spells... Upgrades with time, increasing strength of spells.")
+						+ Abilities.BLACK_HOLE.getAbout() + Abilities.ENTITY_DARKNESS.getAbout()
+						+ Abilities.LIBRARIAN_SHIELD.getAbout() + Abilities.WEAPON_DARKNESS.getAbout(),
+				"Void of Blindness",
+				"Create massive void of blindness field. Everyone who dares steps inside, will be affected by paranoia and glow. Librarian also gets a damage and speed boost.", 8);
 
 		final ClassEquipment eq = this.getClassEquipment(true);
 

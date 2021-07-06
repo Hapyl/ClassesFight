@@ -30,11 +30,13 @@ import ru.hapyl.classesfight.ability.Response;
 import ru.hapyl.classesfight.utils.GameUtils;
 
 public class WindStrider extends Ability {
+	private final double distance = 3.0d;
+
 	public WindStrider() {
 		// Instantly create swirl of wind that pulls nearby enemies to it but pushes you up in the sky and grants you slow falling for a short duration.
 		super("Wind Strider", "Instantly create swirl of wind at your current location. Use the gust of it to pull enemies and fly high up.");
 		this.setItem(Material.FEATHER);
-		this.setCooldownSec(11);
+		this.setCooldownSec(8);
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class WindStrider extends Ability {
 
 		// fx
 		PlayerLib.playSound(Sound.ITEM_TRIDENT_RIPTIDE_1, 0.75f);
-		Geometry.drawCircle(location, 2.5d, Quality.NORMAL, new Draw(Particle.BLOCK_CRACK) {
+		Geometry.drawCircle(location, distance, Quality.HIGH, new Draw(Particle.BLOCK_CRACK) {
 			@Override
 			public void draw(Location location) {
 				final World world = location.getWorld();
@@ -56,7 +58,7 @@ public class WindStrider extends Ability {
 		});
 
 		PlayerLib.addEffect(player, PotionEffectType.SLOW_FALLING, 40, 1);
-		GameUtils.getPlayerInRange(location, 2.5d).forEach(target -> {
+		GameUtils.getPlayerInRange(location, distance).forEach(target -> {
 			if (target == player) {
 				target.setVelocity(target.getVelocity().setY(1.25f));
 			}

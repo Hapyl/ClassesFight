@@ -104,6 +104,14 @@ public enum Abilities {
 	// Wind Warrior
 	WIND_STRIDER(new WindStrider()),
 
+	// Juju
+	ARROW_SHIELD(new ArrowShield()),
+	CLIMB(new Climb()),
+
+	// War Machine
+	LASER_EYE(new LaserEye()),
+	SHELL_GRENADE(new Grenade()),
+
 	;
 
 	private final Ability ability;
@@ -153,12 +161,11 @@ public enum Abilities {
 			return "__&cInvalid Ability (null)";
 		}
 
-		final String cooldown = String.format(" &b(%ss cd)", ability.getCooldown() % 20 == 0 ?
+		final String cooldown = String.format(" &b(&b%s&bs &bcd&b)", ability.getCooldown() % 20 == 0 ?
 				"" + (ability.getCooldown() / 20) :
 				BukkitUtils.decimalFormat((ability.getCooldown() / 20f)));
-		return "__&e○ " + ability.getName() + " &7" + ability.getAbout() + ((ability.getCooldown() == 0 || !ability.isShowCooldown()) ?
-				"" :
-				cooldown) + "__";
+		return "__&e○ " + ability.getName() + " &7" + ability.getAbout() + ((ability.getCooldown() == 0
+				|| !ability.isShowCooldown()) ? "" : cooldown) + "__";
 	}
 
 	public Ability getAbility() {

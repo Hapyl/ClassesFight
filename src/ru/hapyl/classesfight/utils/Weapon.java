@@ -18,12 +18,16 @@
 
 package ru.hapyl.classesfight.utils;
 
+import com.google.common.collect.Maps;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.inventory.ItemStack;
 import ru.hapyl.classesfight.GameManager;
+
+import java.util.Map;
 
 public class Weapon {
 
@@ -34,6 +38,7 @@ public class Weapon {
 	private String smartLore;
 	private double pureDamage;
 	private boolean cancelEvent;
+	private final Map<Enchantment, Integer> enchants;
 
 	public Weapon(Material material) {
 		this(material, null);
@@ -46,6 +51,7 @@ public class Weapon {
 		this.lore = null;
 		this.pureDamage = 1.0d;
 		this.cancelEvent = true;
+		this.enchants = Maps.newHashMap();
 	}
 
 	public void onLeftClick(Player player) {
@@ -90,6 +96,11 @@ public class Weapon {
 		return this;
 	}
 
+	public Weapon withEnchant(Enchantment enchant, int level) {
+		this.enchants.put(enchant, level);
+		return this;
+	}
+
 	public String getLore() {
 		return lore;
 	}
@@ -110,6 +121,10 @@ public class Weapon {
 		return this.create();
 	}
 
+	public ItemStack toItemStack() {
+		return this.create();
+	}
+
 	public ItemStack create() {
 		final CFItemBuilder builder = this.id == null ? new CFItemBuilder(this.material) : new CFItemBuilder(this.material, this.id);
 		if (this.lore != null) {
@@ -117,6 +132,9 @@ public class Weapon {
 		}
 		if (this.smartLore != null) {
 			builder.addSmartLore(this.smartLore);
+		}
+		if (!this.enchants.isEmpty()) {
+			this.enchants.forEach(builder::addEnchant);
 		}
 		if (this.id != null) {
 			builder.addClickEvent(this::onLeftClick, Action.LEFT_CLICK_AIR, Action.LEFT_CLICK_BLOCK);

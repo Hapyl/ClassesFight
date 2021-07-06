@@ -44,7 +44,7 @@ import ru.hapyl.classesfight.utils.entity.GarbageEntity;
 
 public class BlackHole extends Ability implements GrimoireCooldownApplier {
 	public BlackHole() {
-		super("Black Hole", "");
+		super("Black Hole", "Creates a black hole at your target block. Pulling enemies in and dealing &b3&7/&b5&7/&b7&7/&b9&7 damage per second.");
 		this.setItem(Material.BLACK_CANDLE);
 	}
 

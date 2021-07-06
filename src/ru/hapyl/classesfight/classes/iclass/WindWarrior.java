@@ -53,11 +53,6 @@ public class WindWarrior extends IClass {
 	}
 
 	@Override
-	public void onPlayerRevealed(Player player) {
-
-	}
-
-	@Override
 	public void useUltimate(Player player) {
 		final Location startLocation = player.getLocation().add(player.getLocation().getDirection().multiply(2.5d).setY(0.0d));
 

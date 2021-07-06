@@ -39,7 +39,7 @@ import ru.hapyl.classesfight.utils.GameUtils;
 
 public class Darkness extends Ability implements GrimoireCooldownApplier {
 	public Darkness() {
-		super("Darkness Spell", "");
+		super("Darkness Spell", "Launches a sprite of darkness, dealing &b2&7/&b4&7/&b6&7/&b8&7 damage and applying paranoia. This spell has 3 charges.");
 		this.setItem(Material.WITHER_ROSE);
 		this.getItem().setStartAmount(3);
 	}

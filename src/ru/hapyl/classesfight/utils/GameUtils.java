@@ -19,6 +19,7 @@
 package ru.hapyl.classesfight.utils;
 
 import kz.hapyl.spigotutils.module.annotate.NULLABLE;
+import kz.hapyl.spigotutils.module.math.Numbers;
 import kz.hapyl.spigotutils.module.util.Action;
 import kz.hapyl.spigotutils.module.util.BukkitUtils;
 import org.bukkit.*;
@@ -285,9 +286,9 @@ public class GameUtils {
 		public Traceable(Location location, double limit, double shift, int delay) {
 			this.location = location.clone();
 			this.vector = this.location.getDirection();
-			this.limit = limit;
-			this.shift = shift;
-			this.delay = delay;
+			this.limit = Math.min(limit, 150);
+			this.shift = Numbers.clamp(shift, 0.01, 10);
+			this.delay = Math.max(delay, 0);
 			this.current = 0.0d;
 		}
 
@@ -315,37 +316,57 @@ public class GameUtils {
 
 		private void start(Action<Traceable> action, Action<Player> action0) {
 
+			final Runnable runnable = () -> {
+				if ((current += shift) >= limit) {
+					return;
+				}
+
+				final double x = vector.getX() * current;
+				final double y = vector.getY() * current;
+				final double z = vector.getZ() * current;
+
+				location.add(x, y, z);
+
+				if (action != null) {
+					action.use(Traceable.this);
+				}
+
+				if (action0 != null) {
+					GameUtils.getPlayerInRange(location, 0.5d).forEach(action0::use);
+				}
+
+				location.subtract(x, y, z);
+
+			};
+
+			// Instant
+			if (delay <= 0) {
+				while (canRun()) {
+					runnable.run();
+				}
+				return;
+			}
+
 			new GameTask() {
 				@Override
 				public void run() {
-					if ((current += shift) >= limit) {
+					if (canRun()) {
+						runnable.run();
+					}
+					else {
 						this.cancel();
-						return;
 					}
-
-					final double x = vector.getX() * current;
-					final double y = vector.getY() * current;
-					final double z = vector.getZ() * current;
-
-					location.add(x, y, z);
-					if (action != null) {
-						action.use(Traceable.this);
-					}
-					if (stop) {
-						this.cancel();
-						return;
-					}
-
-					if (action0 != null) {
-						GameUtils.getPlayerInRange(location, 0.5d).forEach(action0::use);
-					}
-
-					location.subtract(x, y, z);
-
 				}
 			}.runTaskTimer(0, delay);
 
+		}
 
+		public boolean isStopped() {
+			return stop;
+		}
+
+		private boolean canRun() {
+			return !this.stop && !(current >= limit);
 		}
 
 	}
@@ -383,7 +404,9 @@ public class GameUtils {
 						continue;
 					if (entity instanceof Player) {
 						if (!Spectator.isSpectator((Player)entity)) {
-							DamageFeature.damage((Player)entity, shooter, damage, cause);
+							if (damage > 0.0d) {
+								DamageFeature.damage((Player)entity, shooter, damage, cause);
+							}
 							if (onHit != null) {
 								onHit.accept((Player)entity);
 							}

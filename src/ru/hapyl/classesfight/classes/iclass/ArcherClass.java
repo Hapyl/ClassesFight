@@ -63,7 +63,8 @@ public class ArcherClass extends IClass implements Listener {
 	public ArcherClass() {
 		super("Hunter", Material.BOW);
 		this.setRole(ClassRole.RANGE);
-		this.setInfo("&7You are the hunter! With ability to infuse arrows, and well, obviously a cool bow!__", Icons.ABILITY_DOT + "Hawkeye &e&lPASSIVE &7Fully charged shots while sneaking have &b25% &7chance to launch a Hawkeye arrow. Hawkeye arrows will aim to a closest player when they're near enough.__" + Abilities.SHOCK_ARROW
+		this.setInfo("&7You are the hunter! With ability to infuse arrows, and well, obviously a cool bow!__",
+				Icons.ABILITY_DOT + "Hawkeye &e&lPASSIVE &7Fully charged shots while sneaking have &b25% &7chance to launch a Hawkeye arrow. Hawkeye arrows will aim to a closest player when they're near enough.__" + Abilities.SHOCK_ARROW
 				.getAbout() + Abilities.TRIPLE_ARROW.getAbout(), "BOOM BOW", "Equips a &6&lBOOM BOW &7for &b6s &7that shoots &c&lExlosive &7arrows that explodes upon hitting a block dealing massive damage.", 7);
 		this.setUltimateSound(Sound.ITEM_CROSSBOW_SHOOT, 0.25f);
 		this.setRating(ClassRating.NOT_YET);

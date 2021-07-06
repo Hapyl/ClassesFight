@@ -209,6 +209,7 @@ public class ClassesFight {
 		processor.registerCommand(new CandleCommand("candle"));
 		processor.registerCommand(new PatchNotesCommand("patchnotes"));
 		processor.registerCommand(new ParticleCommand("par"));
+		processor.registerCommand(new DamageCommand("damage"));
 
 		processor.registerCommand(new SimplePlayerAdminCommand("testresetdoor") {
 			@Override
@@ -412,7 +413,6 @@ public class ClassesFight {
 		new ShortcutsCommand();
 
 		addCommand("gm", new GamemodeCommand());
-		addCommand("damage", new DamageCommand());
 		addCommand("vector", new VectorCommand());
 		addCommand("ultimate", new GameUltimateCommand());
 		addCommand("rubies", new RubyCommand());

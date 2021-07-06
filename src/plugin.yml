@@ -48,8 +48,6 @@ commands:
     description: ""
   gm:
     description: ""
-  damage:
-    description: ""
   force:
     description: "Forces god blessings for testing."
   database:

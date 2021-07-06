@@ -72,22 +72,23 @@ public enum ClassManager {
 	RPS(new RockPaperClass()),
 
 	SWOOPER(new SwooperClass(), ClassStatus.UPDATED_ULTIMATE),
-	STAR(new StarClass(), ClassStatus.NEW),
-	PYRO(new Pyrotand(), ClassStatus.NEW),
-	MOONWALKER(new Moonwalker(), ClassStatus.NEW),
+	STAR(new StarClass()),
+	PYRO(new Pyrotand()),
+	MOONWALKER(new Moonwalker()),
 
-	PYRATIA(new Pytaria(), ClassStatus.NEW),
-	WITCHER(new TheWitcher(), ClassStatus.NEW),
+	PYRATIA(new Pytaria()),
+	WITCHER(new TheWitcher()),
 
-	GRAVITY(new GravityClass(), ClassStatus.NEW),
-	LIBRARIAN(new Librarian(), ClassStatus.NEW),
+	GRAVITY(new GravityClass()),
+	LIBRARIAN(new Librarian()),
 	PRINCESS(new Princess(), ClassStatus.NEW),
 	HOCUS(new HocusClass(), ClassStatus.NEW),
 	WIND_WARRIOR(new WindWarrior(), ClassStatus.NEW),
+	JUJU(new JujuArcher(), ClassStatus.NEW),
+	WAR_MACHINE(new KillingMachine(), ClassStatus.NEW),
+
+	//NEBULA(new Nebula(), ClassStatus.NEW)
 	//AAD(new AngelAndDemon()),
-	//SECRET_1(new SecretClass()),
-	//SECRET_2(new SecretClass()),
-	//SECRET_3(new SecretClass()),
 
 	;
 
@@ -233,7 +234,7 @@ public enum ClassManager {
 		return b;
 	}
 
-	public static ClassManager getClass(@Nullable  Player player) {
+	public static ClassManager getClass(@Nullable Player player) {
 		if (player == null) {
 			return STARTER;
 		}
@@ -246,7 +247,6 @@ public enum ClassManager {
 			final ClassManager cz = getClass(player);
 			cz.theClass.onPlayerRevealed(player);
 		});
-
 	}
 
 	public static void executeStartScriptForEach() {

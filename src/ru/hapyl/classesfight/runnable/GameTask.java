@@ -26,6 +26,7 @@ import ru.hapyl.classesfight.Main;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 /**
  * This tasks will be cancelled after game reset
@@ -38,7 +39,15 @@ public abstract class GameTask implements Runnable {
 	private BukkitRunnable atCancel;
 
 	public GameTask() {
-		byId.put((long) byId.size(), this);
+		byId.put((long)byId.size(), this);
+	}
+
+	public static GameTask runTaskTimerTimes(Consumer<GameTask> runnable, int delay, int period, int maxTimes) {
+		return runTaskTimerTimes((a, b) -> runnable.accept(a), delay, period, maxTimes);
+	}
+
+	public static GameTask runTaskTimerTimes(Consumer<GameTask> runnable, int period, int maxTimes) {
+		return runTaskTimerTimes((a, b) -> runnable.accept(a), 0, period, maxTimes);
 	}
 
 	public static GameTask runTaskTimerTimes(BiConsumer<GameTask, Integer> runnable, int delay, int period, int maxTimes) {

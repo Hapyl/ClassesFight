@@ -1,3 +1,21 @@
+/*
+ * ClassesFight, a Minecraft plugin.
+ * Copyright (C) 2021 hapyl
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see <https://www.gnu.org/licenses/>.
+ */
+
 package ru.hapyl.classesfight.feature;
 
 import kz.hapyl.spigotutils.module.util.CollectionUtils;
@@ -45,7 +63,6 @@ public enum EnumDamageCause {
 	SATCHEL(true, "had their last flights", "with"),
 	TORNADO(true, "couldn't find the wind", "of"),
 
-
 	// *==* there are vanilla ones, have to use them *==*
 
 	// Have to consider entity_attack as custom damage for display porpoises
@@ -56,17 +73,15 @@ public enum EnumDamageCause {
 	FIRE_TICK(false, FIRE.deathMessage),
 	LAVA(false, FIRE.deathMessage),
 	DROWNING(false, "drowned"),
-	BLOCK_EXPLOSION,
+	BLOCK_EXPLOSION(false, "exploded", "by"),
 	ENTITY_EXPLOSION(false, "exploded", "by"),
 	VOID(false, "fell into the void"),
 	POISON(false, "poisoned to death", "by"),
-	MAGIC,
-	WITHER,
-	FALLING_BLOCK,
-	DRAGON_BREATH,
-	CRAMMING,
-
-	//
+	MAGIC(false, "magically died", "with help of"),
+	WITHER(false, "withered to death", "by"),
+	FALLING_BLOCK(false, "should've been wearing a helmet"),
+	DRAGON_BREATH(false, "didn't like the smell of dragon"),
+	CRAMMING(false, "is too fat"),
 
 	NONE, // this used as default return
 	OTHER; // this used if there no other damage
@@ -94,10 +109,6 @@ public enum EnumDamageCause {
 
 	EnumDamageCause() {
 		this(false);
-	}
-
-	public DeathMessage[] getDeathMessage() {
-		return deathMessage;
 	}
 
 	public DeathMessage getRandomIfMultiple() {
